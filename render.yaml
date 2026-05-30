@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: snack-museum
+    env: node
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: CLOUDINARY_CLOUD_NAME
+        value: dj2hdvawd
+      - key: CLOUDINARY_API_KEY
+        value: "954544335642564"
+      - key: CLOUDINARY_API_SECRET
+        value: qMxHXizP2liNVtStf26aAfmGGgo
