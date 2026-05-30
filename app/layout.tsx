@@ -15,8 +15,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "🍿 零食博物馆 Snack Museum",
-  description: "专注小众、地方特色及健康零食的独立测评博客。发现你从未尝过的美味零食！",
+  title: "鑫安好物优选",
+  description: "精选好物，品质生活。发现值得购买的美味零食！",
 };
 
 export default function RootLayout({

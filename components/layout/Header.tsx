@@ -9,7 +9,7 @@ export function Header() {
           className="text-xl font-extrabold tracking-tight flex items-center gap-2"
         >
           <span className="text-2xl">🍿</span>
-          <span className="gradient-text">零食博物馆</span>
+          <span className="gradient-text">鑫安好物优选</span>
         </Link>
 
         <nav className="hidden sm:flex items-center gap-6 text-sm font-medium">
@@ -23,7 +23,7 @@ export function Header() {
             href="/leaderboard"
             className="text-dark/60 hover:text-pink transition-colors"
           >
-            红黑榜
+            好物精选
           </Link>
           <Link
             href="/random"

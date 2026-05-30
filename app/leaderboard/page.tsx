@@ -4,8 +4,7 @@ import { getSnacks } from "@/lib/data";
 import { LeaderboardClient } from "./LeaderboardClient";
 
 export const metadata = {
-  title: "红黑榜 | 零食博物馆",
-  description: "无限回购红榜 vs 避雷踩坑黑榜 — 零食博物馆权威测评",
+  title: "好物精选 | 鑫安好物优选",
 };
 
 export default function LeaderboardPage() {
