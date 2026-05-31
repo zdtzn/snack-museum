@@ -3,112 +3,1671 @@
     {
       "name": "山东",
       "cities": [
-        { "name": "临沂", "wechat": "kefu_linyi", "phone": "" },
-        { "name": "济南", "wechat": "kefu_jinan", "phone": "" },
-        { "name": "青岛", "wechat": "kefu_qingdao", "phone": "" },
-        { "name": "烟台", "wechat": "kefu_yantai", "phone": "" },
-        { "name": "潍坊", "wechat": "kefu_weifang", "phone": "" }
+        {
+          "name": "济南",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "青岛",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "淄博",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "枣庄",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "东营",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "烟台",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "潍坊",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "济宁",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "泰安",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "威海",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "日照",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "临沂",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "德州",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "聊城",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "滨州",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "菏泽",
+          "wechat": "kefu_default",
+          "image": ""
+        }
       ]
     },
     {
       "name": "广东",
       "cities": [
-        { "name": "广州", "wechat": "kefu_gz", "phone": "" },
-        { "name": "深圳", "wechat": "kefu_sz", "phone": "" },
-        { "name": "东莞", "wechat": "kefu_dg", "phone": "" },
-        { "name": "佛山", "wechat": "kefu_fs", "phone": "" }
+        {
+          "name": "广州",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "韶关",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "深圳",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "珠海",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "汕头",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "佛山",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "江门",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "湛江",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "茂名",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "肇庆",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "惠州",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "梅州",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "汕尾",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "河源",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "阳江",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "清远",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "东莞",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "中山",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "潮州",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "揭阳",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "云浮",
+          "wechat": "kefu_default",
+          "image": ""
+        }
       ]
     },
     {
       "name": "浙江",
       "cities": [
-        { "name": "杭州", "wechat": "kefu_hz", "phone": "" },
-        { "name": "宁波", "wechat": "kefu_nb", "phone": "" },
-        { "name": "温州", "wechat": "kefu_wz", "phone": "" },
-        { "name": "义乌", "wechat": "kefu_yw", "phone": "" }
+        {
+          "name": "杭州",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "宁波",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "温州",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "嘉兴",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "湖州",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "绍兴",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "金华",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "衢州",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "舟山",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "台州",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "丽水",
+          "wechat": "kefu_default",
+          "image": ""
+        }
       ]
     },
     {
       "name": "江苏",
       "cities": [
-        { "name": "南京", "wechat": "kefu_nanjing", "phone": "" },
-        { "name": "苏州", "wechat": "kefu_suzhou", "phone": "" },
-        { "name": "无锡", "wechat": "kefu_wuxi", "phone": "" },
-        { "name": "徐州", "wechat": "kefu_xuzhou", "phone": "" }
-      ]
-    },
-    {
-      "name": "河北",
-      "cities": [
-        { "name": "石家庄", "wechat": "kefu_sjz", "phone": "" },
-        { "name": "保定", "wechat": "kefu_baoding", "phone": "" },
-        { "name": "唐山", "wechat": "kefu_tangshan", "phone": "" }
-      ]
-    },
-    {
-      "name": "河南",
-      "cities": [
-        { "name": "郑州", "wechat": "kefu_zz", "phone": "" },
-        { "name": "洛阳", "wechat": "kefu_luoyang", "phone": "" },
-        { "name": "南阳", "wechat": "kefu_nanyang", "phone": "" }
-      ]
-    },
-    {
-      "name": "湖北",
-      "cities": [
-        { "name": "武汉", "wechat": "kefu_wh", "phone": "" },
-        { "name": "宜昌", "wechat": "kefu_yichang", "phone": "" },
-        { "name": "襄阳", "wechat": "kefu_xiangyang", "phone": "" }
-      ]
-    },
-    {
-      "name": "湖南",
-      "cities": [
-        { "name": "长沙", "wechat": "kefu_cs", "phone": "" },
-        { "name": "株洲", "wechat": "kefu_zhuzhou", "phone": "" },
-        { "name": "衡阳", "wechat": "kefu_hengyang", "phone": "" }
-      ]
-    },
-    {
-      "name": "四川",
-      "cities": [
-        { "name": "成都", "wechat": "kefu_cd", "phone": "" },
-        { "name": "绵阳", "wechat": "kefu_mianyang", "phone": "" },
-        { "name": "宜宾", "wechat": "kefu_yibin", "phone": "" }
-      ]
-    },
-    {
-      "name": "安徽",
-      "cities": [
-        { "name": "合肥", "wechat": "kefu_hf", "phone": "" },
-        { "name": "芜湖", "wechat": "kefu_wuhu", "phone": "" },
-        { "name": "蚌埠", "wechat": "kefu_bengbu", "phone": "" }
-      ]
-    },
-    {
-      "name": "福建",
-      "cities": [
-        { "name": "福州", "wechat": "kefu_fz", "phone": "" },
-        { "name": "厦门", "wechat": "kefu_xm", "phone": "" },
-        { "name": "泉州", "wechat": "kefu_qz", "phone": "" }
+        {
+          "name": "南京",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "无锡",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "徐州",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "常州",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "苏州",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "南通",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "连云港",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "淮安",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "盐城",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "扬州",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "镇江",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "泰州",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "宿迁",
+          "wechat": "kefu_default",
+          "image": ""
+        }
       ]
     },
     {
       "name": "北京",
       "cities": [
-        { "name": "北京", "wechat": "kefu_bj", "phone": "" }
+        {
+          "name": "北京",
+          "wechat": "kefu_default",
+          "image": ""
+        }
       ]
     },
     {
       "name": "上海",
       "cities": [
-        { "name": "上海", "wechat": "kefu_sh", "phone": "" }
+        {
+          "name": "上海",
+          "wechat": "kefu_default",
+          "image": ""
+        }
       ]
     },
     {
-      "name": "其他地区",
+      "name": "天津",
       "cities": [
-        { "name": "全国统一客服", "wechat": "kefu_general", "phone": "" }
+        {
+          "name": "天津",
+          "wechat": "kefu_default",
+          "image": ""
+        }
+      ]
+    },
+    {
+      "name": "重庆",
+      "cities": [
+        {
+          "name": "重庆",
+          "wechat": "kefu_default",
+          "image": ""
+        }
+      ]
+    },
+    {
+      "name": "河南",
+      "cities": [
+        {
+          "name": "郑州",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "开封",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "洛阳",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "平顶山",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "安阳",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "鹤壁",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "新乡",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "焦作",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "濮阳",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "许昌",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "漯河",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "三门峡",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "南阳",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "商丘",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "信阳",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "周口",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "驻马店",
+          "wechat": "kefu_default",
+          "image": ""
+        }
+      ]
+    },
+    {
+      "name": "四川",
+      "cities": [
+        {
+          "name": "成都",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "自贡",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "攀枝花",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "泸州",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "德阳",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "绵阳",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "广元",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "遂宁",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "内江",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "乐山",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "南充",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "眉山",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "宜宾",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "广安",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "达州",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "雅安",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "巴中",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "资阳",
+          "wechat": "kefu_default",
+          "image": ""
+        }
+      ]
+    },
+    {
+      "name": "湖北",
+      "cities": [
+        {
+          "name": "武汉",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "黄石",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "十堰",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "宜昌",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "襄阳",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "鄂州",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "荆门",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "孝感",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "荆州",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "黄冈",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "咸宁",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "随州",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "恩施",
+          "wechat": "kefu_default",
+          "image": ""
+        }
+      ]
+    },
+    {
+      "name": "湖南",
+      "cities": [
+        {
+          "name": "长沙",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "株洲",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "湘潭",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "衡阳",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "邵阳",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "岳阳",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "常德",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "张家界",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "益阳",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "郴州",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "永州",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "怀化",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "娄底",
+          "wechat": "kefu_default",
+          "image": ""
+        }
+      ]
+    },
+    {
+      "name": "河北",
+      "cities": [
+        {
+          "name": "石家庄",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "唐山",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "秦皇岛",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "邯郸",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "邢台",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "保定",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "张家口",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "承德",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "沧州",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "廊坊",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "衡水",
+          "wechat": "kefu_default",
+          "image": ""
+        }
+      ]
+    },
+    {
+      "name": "安徽",
+      "cities": [
+        {
+          "name": "合肥",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "芜湖",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "蚌埠",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "淮南",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "马鞍山",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "淮北",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "铜陵",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "安庆",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "黄山",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "滁州",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "阜阳",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "宿州",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "六安",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "亳州",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "池州",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "宣城",
+          "wechat": "kefu_default",
+          "image": ""
+        }
+      ]
+    },
+    {
+      "name": "福建",
+      "cities": [
+        {
+          "name": "福州",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "厦门",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "莆田",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "三明",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "泉州",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "漳州",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "南平",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "龙岩",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "宁德",
+          "wechat": "kefu_default",
+          "image": ""
+        }
+      ]
+    },
+    {
+      "name": "辽宁",
+      "cities": [
+        {
+          "name": "沈阳",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "大连",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "鞍山",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "抚顺",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "本溪",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "丹东",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "锦州",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "营口",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "阜新",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "辽阳",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "盘锦",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "铁岭",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "朝阳",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "葫芦岛",
+          "wechat": "kefu_default",
+          "image": ""
+        }
+      ]
+    },
+    {
+      "name": "江西",
+      "cities": [
+        {
+          "name": "南昌",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "景德镇",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "萍乡",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "九江",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "新余",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "鹰潭",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "赣州",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "吉安",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "宜春",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "抚州",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "上饶",
+          "wechat": "kefu_default",
+          "image": ""
+        }
+      ]
+    },
+    {
+      "name": "山西",
+      "cities": [
+        {
+          "name": "太原",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "大同",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "阳泉",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "长治",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "晋城",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "朔州",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "晋中",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "运城",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "忻州",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "临汾",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "吕梁",
+          "wechat": "kefu_default",
+          "image": ""
+        }
+      ]
+    },
+    {
+      "name": "广西",
+      "cities": [
+        {
+          "name": "南宁",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "柳州",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "桂林",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "梧州",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "北海",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "防城港",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "钦州",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "贵港",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "玉林",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "百色",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "贺州",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "河池",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "来宾",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "崇左",
+          "wechat": "kefu_default",
+          "image": ""
+        }
+      ]
+    },
+    {
+      "name": "陕西",
+      "cities": [
+        {
+          "name": "西安",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "铜川",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "宝鸡",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "咸阳",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "渭南",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "延安",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "汉中",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "榆林",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "安康",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "商洛",
+          "wechat": "kefu_default",
+          "image": ""
+        }
+      ]
+    },
+    {
+      "name": "吉林",
+      "cities": [
+        {
+          "name": "长春",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "吉林",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "四平",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "辽源",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "通化",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "白山",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "松原",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "白城",
+          "wechat": "kefu_default",
+          "image": ""
+        }
+      ]
+    },
+    {
+      "name": "黑龙江",
+      "cities": [
+        {
+          "name": "哈尔滨",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "齐齐哈尔",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "鸡西",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "鹤岗",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "双鸭山",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "大庆",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "伊春",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "佳木斯",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "七台河",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "牡丹江",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "黑河",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "绥化",
+          "wechat": "kefu_default",
+          "image": ""
+        }
+      ]
+    },
+    {
+      "name": "内蒙古",
+      "cities": [
+        {
+          "name": "呼和浩特",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "包头",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "乌海",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "赤峰",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "通辽",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "鄂尔多斯",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "呼伦贝尔",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "巴彦淖尔",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "乌兰察布",
+          "wechat": "kefu_default",
+          "image": ""
+        }
+      ]
+    },
+    {
+      "name": "甘肃",
+      "cities": [
+        {
+          "name": "兰州",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "嘉峪关",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "金昌",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "白银",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "天水",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "武威",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "张掖",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "平凉",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "酒泉",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "庆阳",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "定西",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "陇南",
+          "wechat": "kefu_default",
+          "image": ""
+        }
+      ]
+    },
+    {
+      "name": "贵州",
+      "cities": [
+        {
+          "name": "贵阳",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "六盘水",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "遵义",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "安顺",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "毕节",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "铜仁",
+          "wechat": "kefu_default",
+          "image": ""
+        }
+      ]
+    },
+    {
+      "name": "云南",
+      "cities": [
+        {
+          "name": "昆明",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "曲靖",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "玉溪",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "保山",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "昭通",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "丽江",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "普洱",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "临沧",
+          "wechat": "kefu_default",
+          "image": ""
+        }
+      ]
+    },
+    {
+      "name": "新疆",
+      "cities": [
+        {
+          "name": "乌鲁木齐",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "克拉玛依",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "吐鲁番",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "哈密",
+          "wechat": "kefu_default",
+          "image": ""
+        }
+      ]
+    },
+    {
+      "name": "宁夏",
+      "cities": [
+        {
+          "name": "银川",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "石嘴山",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "吴忠",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "固原",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "中卫",
+          "wechat": "kefu_default",
+          "image": ""
+        }
+      ]
+    },
+    {
+      "name": "青海",
+      "cities": [
+        {
+          "name": "西宁",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "海东",
+          "wechat": "kefu_default",
+          "image": ""
+        }
+      ]
+    },
+    {
+      "name": "西藏",
+      "cities": [
+        {
+          "name": "拉萨",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "日喀则",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "昌都",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "林芝",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "山南",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "那曲",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "阿里",
+          "wechat": "kefu_default",
+          "image": ""
+        }
+      ]
+    },
+    {
+      "name": "海南",
+      "cities": [
+        {
+          "name": "海口",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "三亚",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "三沙",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "儋州",
+          "wechat": "kefu_default",
+          "image": ""
+        }
+      ]
+    },
+    {
+      "name": "港澳台",
+      "cities": [
+        {
+          "name": "香港",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "澳门",
+          "wechat": "kefu_default",
+          "image": ""
+        },
+        {
+          "name": "台湾",
+          "wechat": "kefu_default",
+          "image": ""
+        }
       ]
     }
   ]
