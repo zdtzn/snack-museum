@@ -1,10 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { HeroBanner } from "@/components/home/HeroBanner";
 import { CategoryNav } from "@/components/home/CategoryNav";
 import { SnackCardList } from "@/components/home/SnackCardList";
-import { RandomPicker } from "@/components/snack/RandomPicker";
+import { FeedZone } from "@/components/home/FeedZone";
+import { CustomerService } from "@/components/snack/CustomerService";
 import { Snack, SnackCategory } from "@/lib/snacks";
 
 interface Props {
@@ -13,11 +14,18 @@ interface Props {
 
 export function HomeClient({ snacks }: Props) {
   const [activeCategory, setActiveCategory] = useState<SnackCategory | undefined>(undefined);
-  const [showPicker, setShowPicker] = useState(false);
+  const [showCustomerService, setShowCustomerService] = useState(false);
 
   const filteredSnacks = activeCategory
     ? snacks.filter((s) => s.category === activeCategory)
     : snacks;
+
+  // 监听投喂完成事件
+  useEffect(() => {
+    const handler = () => setShowCustomerService(true);
+    window.addEventListener("open-customer-service", handler);
+    return () => window.removeEventListener("open-customer-service", handler);
+  }, []);
 
   return (
     <>
@@ -25,23 +33,15 @@ export function HomeClient({ snacks }: Props) {
       <CategoryNav active={activeCategory} onSelect={(cat) =>
         setActiveCategory(activeCategory === cat ? undefined : cat)
       } />
-      <section className="max-w-6xl mx-auto px-4 pt-8">
-        <div className="glass p-6 sm:p-8 text-center">
-          <p className="text-4xl mb-3">🎲</p>
-          <h3 className="text-xl font-extrabold text-dark mb-2">不知道吃啥？</h3>
-          <p className="text-sm text-dark/50 mb-4">随机帮你选一款！</p>
-          <button
-            onClick={() => setShowPicker(true)}
-            className="px-6 py-3 bg-gradient-to-r from-primary to-accent text-white font-bold rounded-full
-              shadow-lg shadow-accent/25 hover:shadow-xl hover:shadow-accent/30
-              transition-all hover:scale-105 active:scale-95"
-          >
-            随机选一款 🎰
-          </button>
-        </div>
-      </section>
       <SnackCardList snacks={filteredSnacks} />
-      {showPicker && <RandomPicker snacks={snacks} onClose={() => setShowPicker(false)} />}
+
+      {/* 右下角投喂萌猫 */}
+      <FeedZone />
+
+      {/* 客服弹窗 */}
+      {showCustomerService && (
+        <CustomerService onClose={() => setShowCustomerService(false)} />
+      )}
     </>
   );
 }
