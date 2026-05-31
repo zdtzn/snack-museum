@@ -2,7 +2,7 @@
 
 import { useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Mascot } from "./Mascot";
+import { Mascot3D as Mascot } from "./Mascot3D";
 
 type Mood = "idle" | "excited" | "spicy" | "cool" | "happy" | "full";
 
