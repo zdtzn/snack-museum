@@ -2,11 +2,6 @@
 
 import { useState, useEffect } from "react";
 import { HeroBanner } from "@/components/home/HeroBanner";
-import { AboutUs } from "@/components/home/AboutUs";
-import { Brands } from "@/components/home/Brands";
-import { Stores } from "@/components/home/Stores";
-import { Cooperation } from "@/components/home/Cooperation";
-import { Testimonials } from "@/components/home/Testimonials";
 import { CategoryNav } from "@/components/home/CategoryNav";
 import { SnackCardList } from "@/components/home/SnackCardList";
 import { FeedZone } from "@/components/home/FeedZone";
@@ -34,11 +29,6 @@ export function HomeClient({ snacks }: Props) {
   return (
     <>
       <HeroBanner />
-      <AboutUs />
-      <Brands />
-      <Stores />
-      <Cooperation />
-      <Testimonials />
       <CategoryNav active={activeCategory} onSelect={(cat) =>
         setActiveCategory(activeCategory === cat ? undefined : cat)
       } />

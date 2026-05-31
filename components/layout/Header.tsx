@@ -26,6 +26,12 @@ export function Header() {
             好物精选
           </Link>
           <Link
+            href="/about"
+            className="text-dark/60 hover:text-primary transition-colors"
+          >
+            关于我们
+          </Link>
+          <Link
             href="/random"
             className="text-dark/60 hover:text-accent transition-colors"
           >
