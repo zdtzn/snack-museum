@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { Snack, SnackCategory, CATEGORY_LABELS } from "@/lib/snacks";
 import { Plus, Trash2, Edit3, X, Upload, ImageIcon } from "lucide-react";
 import { AboutEditor } from "./AboutEditor";
+import { CustomerEditor } from "./CustomerEditor";
 
 const ALL_CATEGORIES: SnackCategory[] = [
   "puffed", "candy", "spicy-snack", "instant-food", "beverage", "healthy",
@@ -16,7 +17,7 @@ const emptyForm = () => ({
 });
 
 export default function AdminPage() {
-  const [tab, setTab] = useState<"products" | "about">("products");
+  const [tab, setTab] = useState<"products" | "about" | "customer">("products");
   const [snacks, setSnacks] = useState<Snack[]>([]);
   const [editing, setEditing] = useState<Snack | null>(null);
   const [showForm, setShowForm] = useState(false);
@@ -91,9 +92,13 @@ export default function AdminPage() {
           className={`px-5 py-2.5 rounded-xl font-bold text-sm transition-all ${tab === "about" ? "bg-primary text-white shadow-lg" : "bg-white/60 text-dark/50 hover:bg-primary/10"}`}>
           📖 关于我们
         </button>
+        <button onClick={() => setTab("customer")}
+          className={`px-5 py-2.5 rounded-xl font-bold text-sm transition-all ${tab === "customer" ? "bg-primary text-white shadow-lg" : "bg-white/60 text-dark/50 hover:bg-primary/10"}`}>
+          💬 客服微信
+        </button>
       </div>
 
-      {tab === "about" ? <AboutEditor /> : (
+      {tab === "about" ? <AboutEditor /> : tab === "customer" ? <CustomerEditor /> : (
       <>
       <div className="flex items-center justify-between mb-8">
         <div>

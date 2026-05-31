@@ -15,28 +15,15 @@ export function HeroBanner() {
           精选每一款零食，为你找到值得品尝的好味道
         </p>
 
-        {/* 联系电话 */}
         <div className="flex items-center justify-center gap-3 mb-8">
-          <a
-            href="tel:添加你的电话"
-            className="inline-flex items-center gap-2 px-5 py-3 bg-white/80 text-dark font-bold rounded-full
-              shadow-lg shadow-primary/10 hover:shadow-xl hover:scale-105 transition-all text-sm border border-primary/20"
-          >
-            📞 联系电话
-          </a>
-          <a
-            href="#wechat"
+          <button
+            onClick={() => window.dispatchEvent(new CustomEvent("open-customer-service"))}
             className="inline-flex items-center gap-2 px-5 py-3 bg-white/80 text-dark font-bold rounded-full
               shadow-lg shadow-primary/10 hover:shadow-xl hover:scale-105 transition-all text-sm border border-green/30"
           >
-            💬 加微信选品
-          </a>
+            💬 联系微信
+          </button>
         </div>
-
-        {/* 漂浮 emoji */}
-        <div className="absolute left-[5%] top-[20%] text-4xl hidden lg:block">🍪</div>
-        <div className="absolute right-[8%] top-[30%] text-3xl hidden lg:block">🍬</div>
-        <div className="absolute left-[10%] bottom-[15%] text-3xl hidden lg:block">🥤</div>
       </div>
 
       <div className="wave-divider mt-12" />
