@@ -4,6 +4,7 @@ import { getSnacks } from "@/lib/data";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { RatingStars } from "@/components/snack/RatingStars";
+import { CustomerServiceButton } from "@/components/snack/CustomerServiceButton";
 import { CATEGORY_LABELS } from "@/lib/snacks";
 
 export default async function SnackDetail({ params }: { params: Promise<{ slug: string }> }) {
@@ -54,6 +55,9 @@ export default async function SnackDetail({ params }: { params: Promise<{ slug: 
           <h3 className="text-sm font-bold text-dark/60 mb-2">简介</h3>
           <p className="text-dark/70 leading-relaxed">{snack.review}</p>
         </div>
+
+        {/* 咨询客服 */}
+        <CustomerServiceButton />
 
         {/* 联系方式 */}
         <div className="border-t border-primary/10 pt-6">
