@@ -3,197 +3,152 @@
 import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-type MascotMood = "idle" | "hungry" | "excited" | "spicy" | "cool" | "happy" | "full";
+type MascotMood = "idle" | "excited" | "spicy" | "cool" | "happy" | "full";
 
 interface MascotProps {
   mood?: MascotMood;
-  onReset?: () => void;
 }
 
-const moodConfig: Record<MascotMood, { emoji: string; color: string; label: string }> = {
-  idle: { emoji: "😺", color: "#FFB347", label: "待机中" },
-  hungry: { emoji: "😿", color: "#FF8C69", label: "好饿..." },
-  excited: { emoji: "😻", color: "#FF6B81", label: "想吃!" },
-  spicy: { emoji: "🥵", color: "#FF4444", label: "好辣!!" },
-  cool: { emoji: "😎", color: "#7BED9F", label: "清爽!" },
-  happy: { emoji: "🥳", color: "#FFD700", label: "美味!" },
-  full: { emoji: "😋", color: "#FFB347", label: "满足!" },
-};
-
 const idleBubbles = [
-  "今天又是搬砖的一天，好饿呀…",
-  "嘴巴寂寞了，快投喂我！",
-  "喵~有没有好吃的？",
-  "肚子咕噜噜叫了…",
+  "好饿呀，快拖个零食喂我！",
+  "嘴巴寂寞了...把零食丢进来~",
+  "喵呜~有没有好吃的？",
+  "肚子咕噜噜叫了…求投喂！",
 ];
 
-export function Mascot({ mood = "idle", onReset }: MascotProps) {
+export function Mascot({ mood = "idle" }: MascotProps) {
   const [bubbleIndex, setBubbleIndex] = useState(0);
   const [bubbleVisible, setBubbleVisible] = useState(true);
-  const [eyesLooking, setEyesLooking] = useState("center");
-  const config = moodConfig[mood];
+  const [blinking, setBlinking] = useState(false);
 
   // 气泡轮播
   useEffect(() => {
-    const interval = setInterval(() => {
+    const t = setInterval(() => {
       setBubbleVisible(false);
-      setTimeout(() => {
-        setBubbleIndex((i) => (i + 1) % idleBubbles.length);
-        setBubbleVisible(true);
-      }, 500);
-    }, 5000);
-    return () => clearInterval(interval);
+      setTimeout(() => { setBubbleIndex((i) => (i + 1) % idleBubbles.length); setBubbleVisible(true); }, 500);
+    }, 4000);
+    return () => clearInterval(t);
   }, []);
 
-  // 眼球随机转动
+  // 眨眼
   useEffect(() => {
-    const interval = setInterval(() => {
-      const dirs = ["left", "right", "center", "up"];
-      setEyesLooking(dirs[Math.floor(Math.random() * dirs.length)]);
-    }, 2000);
-    return () => clearInterval(interval);
+    const t = setInterval(() => { setBlinking(true); setTimeout(() => setBlinking(false), 150); }, 3000);
+    return () => clearInterval(t);
   }, []);
 
   return (
-    <div className="relative" style={{ width: 120, height: 140 }}>
-      {/* 气泡 */}
+    <div className="relative" style={{ width: 130, height: 150 }}>
+      {/* 气泡提示 */}
       <AnimatePresence>
         {bubbleVisible && mood === "idle" && (
           <motion.div
-            initial={{ opacity: 0, y: 10, scale: 0.8 }}
+            initial={{ opacity: 0, y: 10, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -10, scale: 0.8 }}
-            className="absolute -top-16 left-1/2 -translate-x-1/2 bg-white/95 text-dark text-[10px] 
-              px-3 py-2 rounded-2xl shadow-lg whitespace-nowrap z-10"
-            style={{ minWidth: 140, textAlign: "center" }}
+            exit={{ opacity: 0, y: -8 }}
+            className="absolute -top-20 left-1/2 -translate-x-1/2 bg-white text-dark text-[11px] 
+              px-3 py-2 rounded-2xl shadow-lg whitespace-nowrap z-10 font-medium"
+            style={{ minWidth: 160, textAlign: "center" }}
           >
-            {idleBubbles[bubbleIndex]}
-            <div className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-3 h-3 bg-white/95 rotate-45" />
+            💬 {idleBubbles[bubbleIndex]}
+            <div className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-3 h-3 bg-white rotate-45" />
           </motion.div>
         )}
       </AnimatePresence>
 
+      {/* 🔥 "拖零食喂我" 闪烁标签 */}
+      {mood === "idle" && (
+        <motion.div
+          className="absolute top-24 -right-6 bg-primary text-white text-[10px] font-bold px-2.5 py-1.5 rounded-full shadow-lg whitespace-nowrap z-10"
+          animate={{ scale: [1, 1.08, 1] }}
+          transition={{ duration: 1.5, repeat: Infinity }}
+        >
+          👈 拖我
+        </motion.div>
+      )}
+
       {/* 猫身体 */}
       <motion.div
-        className="relative cursor-pointer select-none"
+        className="relative select-none"
         animate={
           mood === "spicy"
-            ? { x: [0, -5, 5, -5, 5, 0], transition: { duration: 0.5 } }
+            ? { x: [0, -4, 4, -4, 4, 0], transition: { duration: 0.5 } }
             : mood === "cool"
-            ? { rotate: [0, 15, -15, 15, 0], transition: { duration: 1 } }
+            ? { rotate: [0, 10, -10, 10, 0], transition: { duration: 1.2 } }
             : mood === "happy"
-            ? { y: [0, -10, 0, -10, 0], transition: { duration: 0.5 } }
-            : { y: [0, -2, 0], transition: { duration: 2, repeat: Infinity, ease: "easeInOut" } }
+            ? { y: [0, -8, 0, -8, 0], transition: { duration: 0.5 } }
+            : { y: [0, -2, 0], transition: { duration: 2.5, repeat: Infinity } }
         }
       >
-        {/* 猫脸 */}
-        <div
-          className="w-28 h-28 rounded-full relative flex items-center justify-center"
-          style={{
-            background: `radial-gradient(circle at 40% 40%, #ffe0c0 0%, ${config.color}40 100%)`,
-            border: "3px solid rgba(255,179,71,0.3)",
-          }}
-        >
+        {/* 猫头 */}
+        <div className="w-28 h-24 rounded-[50%_50%_45%_45%] bg-[#FFE0B2] border-3 border-[#FFB347]/30 relative">
+
           {/* 耳朵 */}
-          <div className="absolute -top-4 -left-1 w-8 h-10 bg-[#FFB347] rounded-t-full rotate-[-25deg]" />
-          <div className="absolute -top-4 -right-1 w-8 h-10 bg-[#FFB347] rounded-t-full rotate-[25deg]" />
+          <div className="absolute -top-5 -left-1 w-7 h-10 bg-[#FFB347] rounded-t-full rotate-[-22deg] z-[-1]" />
+          <div className="absolute -top-3 left-1 w-5 h-7 bg-[#FFCC80] rounded-t-full rotate-[-22deg]" />
+          <div className="absolute -top-5 -right-1 w-7 h-10 bg-[#FFB347] rounded-t-full rotate-[22deg] z-[-1]" />
+          <div className="absolute -top-3 right-1 w-5 h-7 bg-[#FFCC80] rounded-t-full rotate-[22deg]" />
 
           {/* 眼睛 */}
-          <div className="flex gap-4 mt-1">
-            <div className="w-6 h-6 bg-white rounded-full relative overflow-hidden border border-dark/20">
-              <div
-                className="w-3 h-3 bg-dark rounded-full absolute top-1/2 -translate-y-1/2 transition-all duration-300"
-                style={{
-                  left: eyesLooking === "left" ? "2px" : eyesLooking === "right" ? "8px" : eyesLooking === "up" ? "4px" : "4px",
-                  top: eyesLooking === "up" ? "1px" : "6px",
-                }}
-              />
+          <div className="flex gap-3 justify-center pt-4">
+            <div className="w-7 h-8 bg-white rounded-[45%] border border-dark/15 overflow-hidden relative">
+              <div className="w-3.5 h-4 bg-dark rounded-full absolute" style={{ top: 3, left: 5 }} />
+              {blinking && <div className="absolute inset-0 bg-white" />}
             </div>
-            <div className="w-6 h-6 bg-white rounded-full relative overflow-hidden border border-dark/20">
-              <div
-                className="w-3 h-3 bg-dark rounded-full absolute top-1/2 -translate-y-1/2 transition-all duration-300"
-                style={{
-                  left: eyesLooking === "left" ? "2px" : eyesLooking === "right" ? "8px" : eyesLooking === "up" ? "4px" : "4px",
-                  top: eyesLooking === "up" ? "1px" : "6px",
-                }}
-              />
+            <div className="w-7 h-8 bg-white rounded-[45%] border border-dark/15 overflow-hidden relative">
+              <div className="w-3.5 h-4 bg-dark rounded-full absolute" style={{ top: 3, left: 5 }} />
+              {blinking && <div className="absolute inset-0 bg-white" />}
             </div>
           </div>
 
-          {/* 嘴巴 */}
-          <div className="absolute bottom-5 text-center text-lg">
-            {mood === "spicy" ? "👅" : mood === "happy" || mood === "full" ? "😋" : "👄"}
+          {/* 鼻子 */}
+          <div className="flex justify-center -mt-0.5">
+            <div className="w-3 h-2.5 bg-[#FF8A80] rounded-full" />
           </div>
 
-          {/* 脸颊 */}
-          {mood === "spicy" && (
+          {/* 嘴 - 张大准备吃东西 */}
+          <div className="flex justify-center gap-3 mt-0.5">
+            <div className="text-sm">(</div>
             <motion.div
-              className="absolute bottom-6 left-3 text-lg"
-              animate={{ scale: [1, 1.3, 1] }}
-              transition={{ duration: 0.5, repeat: Infinity }}
-            >
-              🔥
-            </motion.div>
-          )}
-
-          {/* 冒烟 */}
-          {mood === "spicy" && (
-            <motion.div
-              className="absolute -top-8 left-1/2 -translate-x-1/2 text-sm"
-              animate={{ y: [0, -10, 0], opacity: [0, 1, 0] }}
+              className="w-8 h-6 bg-[#FF5252]/20 rounded-b-2xl border-b-2 border-[#FF5252]/30 flex items-center justify-center"
+              animate={mood === "idle" ? { scaleY: [1, 1.3, 1] } : { scaleY: 1 }}
               transition={{ duration: 1.5, repeat: Infinity }}
             >
-              💨
+              <span className="text-[10px]">😛</span>
             </motion.div>
-          )}
+            <div className="text-sm">)</div>
+          </div>
 
-          {/* 水滴 */}
-          {mood === "cool" && (
-            <>
-              <motion.div
-                className="absolute -right-1 top-3 text-xs"
-                animate={{ y: [0, 20], opacity: [1, 0] }}
-                transition={{ duration: 1, repeat: Infinity }}
-              >
-                💧
-              </motion.div>
-              <motion.div
-                className="absolute right-3 top-1 text-xs"
-                animate={{ y: [0, 25], opacity: [1, 0] }}
-                transition={{ duration: 1.2, repeat: Infinity, delay: 0.3 }}
-              >
-                💧
-              </motion.div>
-            </>
-          )}
-
-          {/* 爱心 */}
-          {mood === "happy" && (
-            <motion.div
-              className="absolute -top-4 right-0 text-sm"
-              animate={{ y: [-5, -25], opacity: [1, 0], scale: [1, 1.5] }}
-              transition={{ duration: 1.5, repeat: Infinity }}
-            >
-              💕
-            </motion.div>
-          )}
+          {/* 胡须 */}
+          <div className="absolute left-2 top-12 flex gap-0.5">
+            <div className="w-5 h-0.5 bg-dark/20 rotate-[-5deg]" />
+            <div className="w-4 h-0.5 bg-dark/20 rotate-[3deg]" />
+          </div>
+          <div className="absolute right-2 top-12 flex gap-0.5">
+            <div className="w-4 h-0.5 bg-dark/20 rotate-[-3deg]" />
+            <div className="w-5 h-0.5 bg-dark/20 rotate-[5deg]" />
+          </div>
         </div>
 
-        {/* 脚 */}
-        <div className="flex justify-center gap-6 mt-1">
-          <div className="w-6 h-4 bg-[#FFB347]/40 rounded-full" />
-          <div className="w-6 h-4 bg-[#FFB347]/40 rounded-full" />
-        </div>
-      </motion.div>
+        {/* 身体 */}
+        <div className="w-24 h-16 bg-[#FFE0B2] rounded-b-[50%] mx-auto -mt-1 border border-[#FFB347]/20" />
 
-      {/* 情绪标签 */}
-      <motion.div
-        className="text-center mt-2 text-xs font-bold"
-        style={{ color: config.color }}
-        animate={{ opacity: [0.7, 1, 0.7] }}
-        transition={{ duration: 2, repeat: Infinity }}
-      >
-        {config.emoji} {config.label}
+        {/* 特效 */}
+        {mood === "spicy" && (
+          <>
+            <motion.div className="absolute -top-6 left-1/2 -translate-x-1/2 text-base" animate={{ y: [0, -12, 0], opacity: [0,1,0] }} transition={{ duration: 1.2, repeat: Infinity }}>💨</motion.div>
+            <motion.div className="absolute top-0 left-0 text-lg" animate={{ scale: [1,1.4,1] }} transition={{ duration: 0.4, repeat: Infinity }}>🔥</motion.div>
+            <motion.div className="absolute top-0 right-0 text-lg" animate={{ scale: [1,1.4,1] }} transition={{ duration: 0.4, repeat: Infinity, delay: 0.2 }}>🔥</motion.div>
+          </>
+        )}
+        {mood === "cool" && (
+          <>
+            <motion.div className="absolute top-4 -right-1 text-xs" animate={{ y: [0,18], opacity: [1,0] }} transition={{ duration: 1, repeat: Infinity }}>💧</motion.div>
+            <motion.div className="absolute top-1 right-3 text-xs" animate={{ y: [0,22], opacity: [1,0] }} transition={{ duration: 1.3, repeat: Infinity, delay: 0.3 }}>💧</motion.div>
+          </>
+        )}
+        {mood === "happy" && (
+          <motion.div className="absolute -top-3 right-1 text-sm" animate={{ y: [-3,-20], opacity: [1,0], scale: [1,1.5] }} transition={{ duration: 1.5, repeat: Infinity }}>💕</motion.div>
+        )}
       </motion.div>
     </div>
   );
