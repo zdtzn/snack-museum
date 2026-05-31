@@ -35,7 +35,10 @@ export function CustomerService({ onClose }: Props) {
           <div className="text-center">
             <div className="glass p-6 mb-4">
               <p className="text-lg font-bold text-dark mb-1">{selectedProvince} · {selectedCity.name}</p>
-              <div className="glass p-4 inline-block min-w-[200px] mt-3">
+              {(selectedCity as any).image && (
+                <img src={(selectedCity as any).image} alt="微信二维码" className="w-40 h-40 mx-auto my-3 object-contain rounded-xl border border-primary/10" />
+              )}
+              <div className="glass p-4 inline-block min-w-[200px] mt-1">
                 <p className="text-xs text-dark/40 mb-1">客服微信</p>
                 <p className="text-xl font-extrabold text-green break-all">{selectedCity.wechat}</p>
               </div>

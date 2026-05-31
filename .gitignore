@@ -36,6 +36,11 @@ yarn-error.log*
 # vercel
 .vercel
 
+# admin-editable data (don't overwrite on deploy)
+data/about-data.json
+data/customer-service.json
+data/snacks.json
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
