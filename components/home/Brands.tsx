@@ -1,16 +1,21 @@
-import aboutData from "@/data/about-data.json";
+"use client";
+
+import { useEffect, useState } from "react";
 
 export function Brands() {
-  const d = aboutData.brands;
+  const [data, setData] = useState<any>(null);
+  useEffect(() => { fetch("/api/about").then(r=>r.json()).then(d=>setData(d.brands)); }, []);
+  if (!data) return null;
+
   return (
     <section className="max-w-6xl mx-auto px-4 py-16 bg-gradient-to-b from-transparent to-primary/5">
       <div className="text-center mb-10">
-        <h2 className="text-3xl sm:text-4xl font-extrabold gradient-text mb-3">{d.title}</h2>
+        <h2 className="text-3xl sm:text-4xl font-extrabold gradient-text mb-3">{data.title}</h2>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {d.items.map((b, i) => (
+        {data.items.map((b: any, i: number) => (
           <div key={i} className={`glass p-5 card-hover flex items-start gap-4 ${b.highlight ? "border-2 border-primary/30" : ""}`}>
-            <div className="text-4xl shrink-0">{b.emoji || "🍪"}</div>
+            {b.image ? <img src={b.image} alt="" className="w-10 h-10 rounded-lg object-cover shrink-0" /> : <div className="text-4xl shrink-0">{b.emoji || "🍪"}</div>}
             <div>
               <div className="flex items-center gap-2 mb-1">
                 <h3 className="font-extrabold text-dark text-sm">{b.name}</h3>
