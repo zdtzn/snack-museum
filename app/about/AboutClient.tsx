@@ -11,9 +11,9 @@ export function AboutClient() {
     <div className="pt-8 pb-16">
       <AboutUs />
       <Brands />
-      <Stores />
       <Cooperation />
       <Testimonials />
+      <Stores />
     </div>
   );
 }
