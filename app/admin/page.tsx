@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { Snack, SnackCategory, CATEGORY_LABELS } from "@/lib/snacks";
 import { Plus, Trash2, Edit3, X, Upload, ImageIcon } from "lucide-react";
+import { AboutEditor } from "./AboutEditor";
 
 const ALL_CATEGORIES: SnackCategory[] = [
   "puffed", "candy", "spicy-snack", "instant-food", "beverage", "healthy",
@@ -15,6 +16,7 @@ const emptyForm = () => ({
 });
 
 export default function AdminPage() {
+  const [tab, setTab] = useState<"products" | "about">("products");
   const [snacks, setSnacks] = useState<Snack[]>([]);
   const [editing, setEditing] = useState<Snack | null>(null);
   const [showForm, setShowForm] = useState(false);
@@ -79,6 +81,20 @@ export default function AdminPage() {
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-12">
+      {/* Tab切换 */}
+      <div className="flex gap-4 mb-8">
+        <button onClick={() => setTab("products")}
+          className={`px-5 py-2.5 rounded-xl font-bold text-sm transition-all ${tab === "products" ? "bg-primary text-white shadow-lg" : "bg-white/60 text-dark/50 hover:bg-primary/10"}`}>
+          📦 产品管理
+        </button>
+        <button onClick={() => setTab("about")}
+          className={`px-5 py-2.5 rounded-xl font-bold text-sm transition-all ${tab === "about" ? "bg-primary text-white shadow-lg" : "bg-white/60 text-dark/50 hover:bg-primary/10"}`}>
+          📖 关于我们
+        </button>
+      </div>
+
+      {tab === "about" ? <AboutEditor /> : (
+      <>
       <div className="flex items-center justify-between mb-8">
         <div>
           <h1 className="text-3xl font-extrabold gradient-text mb-1">🛠️ 管理后台</h1>
@@ -212,6 +228,8 @@ export default function AdminPage() {
           </tbody>
         </table>
       </div>
+      </>
+      )}
     </div>
   );
 }
