@@ -5,10 +5,9 @@ import { CATEGORY_EMOJIS, CATEGORY_LABELS, SnackCategory } from "@/lib/snacks";
 const categories: SnackCategory[] = [
   "puffed",
   "candy",
-  "nuts",
-  "dried-fruit",
+  "spicy-snack",
+  "instant-food",
   "beverage",
-  "baked",
   "healthy",
 ];
 

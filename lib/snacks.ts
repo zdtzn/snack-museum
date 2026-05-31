@@ -1,4 +1,3 @@
-// 零食条目类型
 export interface Snack {
   id: string;
   name: string;
@@ -6,29 +5,28 @@ export interface Snack {
   category: SnackCategory;
   brand: string;
   image: string;
-  rating: number; // 口感评分 0-5
+  rating: number;
   tags: string[];
   review: string;
   date: string;
-  wechat?: string; // 微信号/联系方式
-  phone?: string; // 联系电话
+  wechat?: string;
+  phone?: string;
 }
 
 export type SnackCategory =
-  | "puffed" | "candy" | "nuts" | "dried-fruit"
-  | "beverage" | "baked" | "healthy";
+  | "puffed" | "candy" | "spicy-snack" | "instant-food"
+  | "beverage" | "healthy";
 
 export const CATEGORY_LABELS: Record<SnackCategory, string> = {
   puffed: "🍿 膨化",
   candy: "🍬 糖果",
-  nuts: "🥜 坚果",
-  "dried-fruit": "🍑 果干",
+  "spicy-snack": "🌶 辣条",
+  "instant-food": "🍜 方便速食",
   beverage: "🥤 饮品",
-  baked: "🥐 烘焙",
   healthy: "🥗 健康零食",
 };
 
 export const CATEGORY_EMOJIS: Record<SnackCategory, string> = {
-  puffed: "🍿", candy: "🍬", nuts: "🥜",
-  "dried-fruit": "🍑", beverage: "🥤", baked: "🥐", healthy: "🥗",
+  puffed: "🍿", candy: "🍬", "spicy-snack": "🌶",
+  "instant-food": "🍜", beverage: "🥤", healthy: "🥗",
 };

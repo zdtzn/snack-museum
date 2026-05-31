@@ -5,7 +5,7 @@ import { Snack, SnackCategory, CATEGORY_LABELS } from "@/lib/snacks";
 import { Plus, Trash2, Edit3, X, Upload, ImageIcon } from "lucide-react";
 
 const ALL_CATEGORIES: SnackCategory[] = [
-  "puffed", "candy", "nuts", "dried-fruit", "beverage", "baked", "healthy",
+  "puffed", "candy", "spicy-snack", "instant-food", "beverage", "healthy",
 ];
 
 const emptyForm = () => ({

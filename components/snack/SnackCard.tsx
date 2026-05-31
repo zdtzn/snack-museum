@@ -62,8 +62,8 @@ export function SnackCard({ snack }: SnackCardProps) {
 
 function getEmoji(category: string): string {
   const map: Record<string, string> = {
-    puffed: "🍿", candy: "🍬", nuts: "🥜",
-    "dried-fruit": "🍑", beverage: "🥤", baked: "🥐", healthy: "🥗",
+    puffed: "🍿", candy: "🍬", "spicy-snack": "🌶",
+    "instant-food": "🍜", beverage: "🥤", healthy: "🥗",
   };
   return map[category] || "🍪";
 }
