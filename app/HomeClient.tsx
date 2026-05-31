@@ -36,7 +36,7 @@ export function HomeClient({ snacks }: Props) {
       <SnackCardList snacks={filteredSnacks} />
 
       {/* 右下角投喂萌猫 */}
-      <FeedZone />
+      <FeedZone snackNames={snacks.map(s => s.name)} />
 
       {/* 客服弹窗 */}
       {showCustomerService && (
