@@ -5,7 +5,6 @@ import { HeroBanner } from "@/components/home/HeroBanner";
 import { CategoryNav } from "@/components/home/CategoryNav";
 import { SnackCardList } from "@/components/home/SnackCardList";
 import { FeedZone } from "@/components/home/FeedZone";
-import { PriceComparison } from "@/components/home/PriceComparison";
 import { CustomerService } from "@/components/snack/CustomerService";
 import { Snack, SnackCategory } from "@/lib/snacks";
 
@@ -33,7 +32,6 @@ export function HomeClient({ snacks }: Props) {
       <CategoryNav active={activeCategory} onSelect={(cat) =>
         setActiveCategory(activeCategory === cat ? undefined : cat)
       } />
-      <PriceComparison />
       <SnackCardList snacks={filteredSnacks} />
       <FeedZone snackNames={snacks.map(s => s.name)} />
       {showCustomerService && <CustomerService onClose={() => setShowCustomerService(false)} />}
