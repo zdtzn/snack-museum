@@ -5,6 +5,7 @@ import { Snack, SnackCategory, CATEGORY_LABELS } from "@/lib/snacks";
 import { Plus, Trash2, Edit3, X, Upload, ImageIcon } from "lucide-react";
 import { AboutEditor } from "./AboutEditor";
 import { CustomerEditor } from "./CustomerEditor";
+import { PriceComparisonEditor } from "./PriceComparisonEditor";
 
 const ALL_CATEGORIES: SnackCategory[] = [
   "puffed", "candy", "spicy-snack", "instant-food", "beverage", "healthy",
@@ -17,7 +18,7 @@ const emptyForm = () => ({
 });
 
 export default function AdminPage() {
-  const [tab, setTab] = useState<"products" | "about" | "customer">("products");
+  const [tab, setTab] = useState<"products" | "about" | "customer" | "price">("products");
   const [snacks, setSnacks] = useState<Snack[]>([]);
   const [editing, setEditing] = useState<Snack | null>(null);
   const [showForm, setShowForm] = useState(false);
@@ -96,9 +97,13 @@ export default function AdminPage() {
           className={`px-5 py-2.5 rounded-xl font-bold text-sm transition-all ${tab === "customer" ? "bg-primary text-white shadow-lg" : "bg-white/60 text-dark/50 hover:bg-primary/10"}`}>
           💬 客服微信
         </button>
+        <button onClick={() => setTab("price")}
+          className={`px-5 py-2.5 rounded-xl font-bold text-sm transition-all ${tab === "price" ? "bg-primary text-white shadow-lg" : "bg-white/60 text-dark/50 hover:bg-primary/10"}`}>
+          💰 价格对比
+        </button>
       </div>
 
-      {tab === "about" ? <AboutEditor /> : tab === "customer" ? <CustomerEditor /> : (
+      {tab === "about" ? <AboutEditor /> : tab === "customer" ? <CustomerEditor /> : tab === "price" ? <PriceComparisonEditor /> : (
       <>
       <div className="flex items-center justify-between mb-8">
         <div>
