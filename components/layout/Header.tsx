@@ -10,6 +10,7 @@ export function Header() {
   const links = [
     { href: "/", label: "首页" },
     { href: "/leaderboard", label: "好物精选" },
+    { href: "/test", label: "测测你的人格 🧬" },
     { href: "/about", label: "关于我们" },
     { href: "/random", label: "今天吃什么 🎲" },
   ];
