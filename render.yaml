@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: snack-museum
+    env: node
+    buildCommand: npm install && npm run build
+    startCommand: npm start -- -p $PORT
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      - key: CLOUDINARY_CLOUD_NAME
+        sync: false
+      - key: CLOUDINARY_API_KEY
+        sync: false
+      - key: CLOUDINARY_API_SECRET
+        sync: false
+      - key: ADMIN_USERNAME
+        value: admin
+      - key: ADMIN_PASSWORD
+        sync: false
