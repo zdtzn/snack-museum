@@ -14,7 +14,7 @@ export function Testimonials() {
         {data.items.map((item:any,i:number)=>(
           <div key={i} className="glass p-5 card-hover">
             <p className="text-3xl mb-3">💬</p>
-            <p className="text-sm text-dark/70 leading-relaxed mb-4 italic">"{item.text}"</p>
+            <p className="text-sm text-dark/70 leading-relaxed mb-4 italic">&ldquo;{item.text}&rdquo;</p>
             <div className="flex items-center gap-3 border-t border-primary/10 pt-3">
               <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-white text-xs font-bold">{item.name[0]}</div>
               <div><p className="text-sm font-bold text-dark">{item.name}</p><p className="text-xs text-dark/40">{item.role}</p></div>

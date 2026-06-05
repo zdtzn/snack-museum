@@ -2,10 +2,11 @@ export const dynamic = "force-dynamic";
 
 import { getSnacks } from "@/lib/data";
 import { notFound } from "next/navigation";
+import Image from "next/image";
 import Link from "next/link";
 import { RatingStars } from "@/components/snack/RatingStars";
 import { CustomerServiceButton } from "@/components/snack/CustomerServiceButton";
-import { CATEGORY_LABELS } from "@/lib/snacks";
+import { CATEGORY_EMOJIS, CATEGORY_LABELS } from "@/lib/snacks";
 
 export default async function SnackDetail({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
@@ -21,8 +22,19 @@ export default async function SnackDetail({ params }: { params: Promise<{ slug: 
 
       <div className="glass p-6 sm:p-10">
         {/* 图片 */}
-        <div className="w-full h-64 sm:h-80 rounded-2xl bg-gradient-to-br from-primary-light/30 via-accent/15 to-pink/15 flex items-center justify-center mb-8">
-          <span className="text-8xl">🍪</span>
+        <div className="relative w-full h-64 sm:h-80 rounded-2xl bg-gradient-to-br from-primary-light/30 via-accent/15 to-pink/15 flex items-center justify-center mb-8 overflow-hidden">
+          {snack.image ? (
+            <Image
+              src={snack.image}
+              alt={snack.name}
+              fill
+              sizes="(min-width: 768px) 896px, 100vw"
+              className="object-cover"
+              priority
+            />
+          ) : (
+            <span className="text-8xl">{CATEGORY_EMOJIS[snack.category]}</span>
+          )}
         </div>
 
         {/* 基本信息 */}

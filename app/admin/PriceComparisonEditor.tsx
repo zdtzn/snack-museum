@@ -87,7 +87,7 @@ export function PriceComparisonEditor() {
           <input className={inp} value={data.leftDesc || ""} readOnly={!editing}
             onChange={e => setData({ ...data, leftDesc: e.target.value })} />
 
-          <label className={`${lbl} mt-3`}>大号标语（如"就几包..."）</label>
+          <label className={`${lbl} mt-3`}>大号标语（如&quot;就几包...&quot;）</label>
           <input className={inp} value={data.leftBadge || ""} readOnly={!editing}
             onChange={e => setData({ ...data, leftBadge: e.target.value })} />
 
@@ -122,7 +122,7 @@ export function PriceComparisonEditor() {
           <input className={inp} value={data.rightDesc || ""} readOnly={!editing}
             onChange={e => setData({ ...data, rightDesc: e.target.value })} />
 
-          <label className={`${lbl} mt-3`}>大号标语（如"一整箱！"）</label>
+          <label className={`${lbl} mt-3`}>大号标语（如&quot;一整箱！&quot;）</label>
           <input className={inp} value={data.rightBadge || ""} readOnly={!editing}
             onChange={e => setData({ ...data, rightBadge: e.target.value })} />
 

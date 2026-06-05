@@ -2,7 +2,7 @@
 
 import { useRef, useEffect, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Float, Sphere, Box, Cylinder, Cone, Torus } from "@react-three/drei";
+import { Float, Sphere, Box, Cone, Torus } from "@react-three/drei";
 import * as THREE from "three";
 
 type Mood = "idle" | "excited" | "spicy" | "cool" | "happy" | "full";
@@ -132,7 +132,10 @@ function Cat3D({ mood }: { mood: Mood }) {
 // 完整的 3D 场景组件
 export function Mascot3D({ mood = "idle" }: { mood?: Mood }) {
   const [mounted, setMounted] = useState(false);
-  useEffect(() => { setMounted(true); }, []);
+  useEffect(() => {
+    const frame = requestAnimationFrame(() => setMounted(true));
+    return () => cancelAnimationFrame(frame);
+  }, []);
 
   if (!mounted) return null;
 

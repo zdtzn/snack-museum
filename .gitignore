@@ -35,6 +35,7 @@ yarn-error.log*
 
 # vercel
 .vercel
+.git.broken-*/
 
 # admin-editable data (don't overwrite on deploy)
 data/about-data.json

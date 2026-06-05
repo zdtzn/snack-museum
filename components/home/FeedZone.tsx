@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Mascot } from "./MascotEmoji";
 
@@ -24,10 +24,10 @@ export function FeedZone({ onFeedComplete, snackNames = [] }: FeedZoneProps) {
   const [draggingOver, setDraggingOver] = useState(false);
   const [showResults, setShowResults] = useState(false);
   const [fedSnack, setFedSnack] = useState("");
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile] = useState(
+    () => typeof navigator !== "undefined" && /Mobi|Android|iPhone/i.test(navigator.userAgent)
+  );
   const [showPicker, setShowPicker] = useState(false);
-
-  useEffect(() => { setIsMobile(/Mobi|Android|iPhone/i.test(navigator.userAgent)); }, []);
 
   const feedSnack = useCallback((name: string, tag: string) => {
     const newMood = getMoodFromTag(tag);

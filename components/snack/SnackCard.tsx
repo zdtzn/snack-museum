@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Snack } from "@/lib/snacks";
 import { RatingStars } from "./RatingStars";
 
@@ -35,11 +36,21 @@ export function SnackCard({ snack }: SnackCardProps) {
     >
       <Link href={`/snack/${snack.id}`}>
         <div className="relative h-48 bg-gradient-to-br from-primary-light/40 via-accent/20 to-pink/20 flex items-center justify-center overflow-hidden">
-          <div className="text-6xl group-hover:scale-110 transition-transform duration-500">
-            {getEmoji(snack.category)}
-          </div>
+          {snack.image ? (
+            <Image
+              src={snack.image}
+              alt={snack.name}
+              fill
+              sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+              className="object-cover group-hover:scale-105 transition-transform duration-500"
+            />
+          ) : (
+            <div className="text-6xl group-hover:scale-110 transition-transform duration-500">
+              {getEmoji(snack.category)}
+            </div>
+          )}
         </div>
-        <div className="p-5" onClick={(e) => e.preventDefault()}>
+        <div className="p-5">
           <div className="flex items-center gap-2 mb-1.5">
             <span className="text-xs px-2 py-0.5 rounded-full bg-primary/15 text-primary font-medium">
               {snack.tags[0]}

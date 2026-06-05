@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Snack, SnackCategory, CATEGORY_LABELS } from "@/lib/snacks";
-import { Plus, Trash2, Edit3, X, Upload, ImageIcon } from "lucide-react";
+import { Plus, Trash2, Edit3, X, Upload } from "lucide-react";
 import { AboutEditor } from "./AboutEditor";
 import { CustomerEditor } from "./CustomerEditor";
 import { PriceComparisonEditor } from "./PriceComparisonEditor";
@@ -31,7 +31,21 @@ export default function AdminPage() {
     setSnacks(data.snacks);
   };
 
-  useEffect(() => { loadSnacks(); }, []);
+  useEffect(() => {
+    let ignore = false;
+
+    fetch("/api/snacks")
+      .then((res) => res.json())
+      .then((data) => {
+        if (!ignore) {
+          setSnacks(data.snacks);
+        }
+      });
+
+    return () => {
+      ignore = true;
+    };
+  }, []);
 
   const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
