@@ -55,23 +55,23 @@ export function FeedZone({ onFeedComplete, snackNames = [] }: FeedZoneProps) {
   }, [feedSnack]);
 
   return (
-    <div className="fixed bottom-6 right-6 z-50">
+    <div className="fixed bottom-4 right-4 z-50 sm:bottom-6 sm:right-6">
       <div
-        className={`relative transition-all duration-300 ${draggingOver ? "scale-110" : ""}`}
+        className={`relative rounded-[1.75rem] border border-white/80 bg-white/75 p-2 shadow-2xl shadow-dark/10 backdrop-blur transition-all duration-300 ${draggingOver ? "scale-105 ring-4 ring-primary/20" : ""}`}
         onDragOver={(e) => { e.preventDefault(); setDraggingOver(true); }}
         onDragLeave={() => setDraggingOver(false)}
         onDrop={handleDrop}
         onClick={() => { if (isMobile) setShowPicker(true); }}
-      >
+        >
         {draggingOver && (
-          <motion.div className="absolute -inset-4 rounded-full border-3 border-dashed border-primary"
+          <motion.div className="absolute -inset-3 rounded-[2rem] border-2 border-dashed border-primary"
             animate={{ rotate: 360 }} transition={{ duration: 3, repeat: Infinity, ease: "linear" }} />
         )}
         <AnimatePresence>
           {draggingOver && (
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-              className="absolute -top-8 left-1/2 -translate-x-1/2 text-sm font-extrabold text-primary whitespace-nowrap">
-              🐱 丢进来！丢进来！
+              className="absolute -top-9 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-dark px-3 py-1.5 text-xs font-extrabold text-white shadow-lg">
+              松手试吃
             </motion.div>
           )}
         </AnimatePresence>
@@ -86,16 +86,17 @@ export function FeedZone({ onFeedComplete, snackNames = [] }: FeedZoneProps) {
             className="fixed inset-0 z-[110] flex items-end sm:items-center justify-center p-4 bg-dark/40 backdrop-blur-sm"
             onClick={(e) => { if (e.target === e.currentTarget) setShowPicker(false); }}
           >
-            <div className="glass-heavy w-full max-w-sm p-5 rounded-2xl max-h-[70vh] overflow-y-auto">
+            <div className="w-full max-w-sm rounded-3xl border border-white/80 bg-white p-5 shadow-2xl max-h-[70vh] overflow-y-auto">
               <div className="text-center mb-4">
                 <p className="text-xl">🐱</p>
-                <h3 className="text-base font-extrabold gradient-text">选个零食喂猫猫</h3>
+                <h3 className="text-base font-extrabold text-dark">选个零食给试吃官</h3>
+                <p className="mt-1 text-xs text-dark/40">手机端可直接点选一款</p>
               </div>
               <div className="grid grid-cols-2 gap-2">
                 {snackNames.map((name, i) => (
                   <button key={i} onClick={() => { setShowPicker(false); feedSnack(name, name); }}
-                    className="glass p-3 text-left text-xs font-bold text-dark hover:bg-primary/5 rounded-xl transition-colors truncate">
-                    🍪 {name.length > 12 ? name.slice(0,12)+"..." : name}
+                    className="rounded-2xl border border-dark/10 bg-cream p-3 text-left text-xs font-bold text-dark transition-colors hover:bg-primary/10 truncate">
+                    {name.length > 12 ? name.slice(0,12)+"..." : name}
                   </button>
                 ))}
               </div>
@@ -108,16 +109,16 @@ export function FeedZone({ onFeedComplete, snackNames = [] }: FeedZoneProps) {
       <AnimatePresence>
         {showResults && (
           <motion.div initial={{ opacity: 0, scale: 0.8, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0 }}
-            className="absolute bottom-full mb-4 right-0 w-72 glass-heavy p-5 rounded-2xl shadow-2xl">
+            className="absolute bottom-full right-0 mb-4 w-72 rounded-3xl border border-white/80 bg-white p-5 shadow-2xl shadow-dark/10">
             <div className="text-center">
-              <p className="text-4xl mb-2">🍖</p>
-              <p className="text-sm font-bold text-dark mb-1">呜哇！太好吃了！</p>
-              <p className="text-xs text-dark/50 mb-3"><span className="font-bold text-primary">{fedSnack}</span> 是本店爆款！</p>
+              <p className="mb-2 text-4xl">🍽️</p>
+              <p className="mb-1 text-sm font-bold text-dark">试吃官反馈：值得关注</p>
+              <p className="mb-3 text-xs text-dark/50"><span className="font-bold text-primary">{fedSnack}</span> 适合加入今日候选清单。</p>
               <div className="flex gap-2">
                 <button onClick={() => { setShowResults(false); setMood("idle"); }}
-                  className="flex-1 px-3 py-2 bg-white/70 text-dark text-xs font-bold rounded-xl border border-primary/20 hover:bg-primary/5">再喂一个</button>
+                  className="flex-1 rounded-xl border border-dark/10 bg-cream px-3 py-2 text-xs font-bold text-dark hover:bg-primary/10">再试一款</button>
                 <button onClick={() => { setShowResults(false); window.dispatchEvent(new CustomEvent("open-customer-service")); }}
-                  className="flex-1 px-3 py-2 bg-gradient-to-r from-primary to-accent text-white text-xs font-bold rounded-xl shadow-lg hover:scale-105">💬 咨询拿货</button>
+                  className="flex-1 rounded-xl bg-dark px-3 py-2 text-xs font-bold text-white shadow-lg hover:bg-dark/90">咨询拿货</button>
               </div>
             </div>
           </motion.div>

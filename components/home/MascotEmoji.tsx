@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 type MascotMood = "idle" | "excited" | "spicy" | "cool" | "happy" | "full";
 
 const moodEmojis: Record<MascotMood, { base: string; label: string; st: string }> = {
-  idle:   { base: "🐱", label: "来喂我呀~", st: "bg-white/70 text-dark" },
+  idle:   { base: "🐱", label: "试吃官待命", st: "bg-white/80 text-dark" },
   excited: { base: "😻", label: "想吃想吃!", st: "bg-pink/20 text-pink" },
   spicy:  { base: "😾", label: "好辣!!", st: "bg-red-100 text-red-500" },
   cool:   { base: "🐱", label: "清爽~", st: "bg-green-100 text-green-600" },
@@ -15,10 +15,10 @@ const moodEmojis: Record<MascotMood, { base: string; label: string; st: string }
 };
 
 const bubbles = [
-  "喵~拖个零食丢过来！",
-  "好饿好饿…求投喂",
-  "把零食拖到我嘴里！",
-  "咕噜咕噜…肚子叫了",
+  "拖一张卡片给我试吃",
+  "我来帮你判断爆款",
+  "想知道哪款更适合拿货？",
+  "喂我一口，给你反馈",
 ];
 
 export function Mascot({ mood = "idle" }: { mood?: MascotMood }) {
@@ -43,9 +43,9 @@ export function Mascot({ mood = "idle" }: { mood?: MascotMood }) {
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0 }}
-            className="bg-white text-dark text-xs font-medium px-3 py-2 rounded-2xl shadow-lg mb-2 whitespace-nowrap"
+            className="mb-2 rounded-2xl bg-white px-3 py-2 text-xs font-bold text-dark shadow-lg shadow-dark/8 whitespace-nowrap"
           >
-            💬 {bubbles[bubbleIdx]}
+            {bubbles[bubbleIdx]}
             <div className="absolute top-full left-1/2 -translate-x-1/2 w-3 h-3 bg-white rotate-45 -mt-1.5" />
           </motion.div>
         )}
@@ -53,16 +53,16 @@ export function Mascot({ mood = "idle" }: { mood?: MascotMood }) {
 
       {mood === "idle" && (
         <motion.div
-          className="bg-primary text-white text-[11px] font-bold px-2.5 py-1 rounded-full shadow mb-2"
+          className="mb-2 rounded-full bg-dark px-3 py-1 text-[11px] font-bold text-white shadow"
           animate={{ scale: [1, 1.06, 1] }}
           transition={{ duration: 1.5, repeat: Infinity }}
         >
-          👆 拖零食到猫猫身上
+          拖卡片试吃
         </motion.div>
       )}
 
       <motion.div
-        className="text-8xl select-none"
+        className="select-none text-6xl sm:text-7xl"
         animate={
           mood === "spicy"
             ? { x: [0, -3, 3, -3, 3, 0], transition: { duration: 0.4 } }
@@ -86,7 +86,7 @@ export function Mascot({ mood = "idle" }: { mood?: MascotMood }) {
       {mood === "happy" && <div className="text-base -mt-1">💕</div>}
 
       <motion.div
-        className={`text-[11px] font-bold px-2.5 py-0.5 rounded-full mt-1 ${m.st}`}
+        className={`mt-1 rounded-full px-2.5 py-0.5 text-[11px] font-bold ${m.st}`}
         animate={{ opacity: [0.7, 1, 0.7] }}
         transition={{ duration: 2, repeat: Infinity }}
       >

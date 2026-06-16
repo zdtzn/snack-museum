@@ -27,15 +27,15 @@ export function SnackCard({ snack }: SnackCardProps) {
 
   return (
     <article
-      className="glass card-hover overflow-hidden cursor-grab active:cursor-grabbing group"
+      className="group overflow-hidden rounded-3xl border border-dark/10 bg-white shadow-sm shadow-dark/5 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-dark/10 cursor-grab active:cursor-grabbing"
       draggable
       onDragStart={handleDragStart}
       onDragEnd={(e) => e.currentTarget.classList.remove("ring-2", "ring-primary/50")}
       onDragOver={handleDragOver}
       onDragLeave={handleDragLeave}
     >
-      <Link href={`/snack/${snack.id}`}>
-        <div className="relative h-48 bg-gradient-to-br from-primary-light/40 via-accent/20 to-pink/20 flex items-center justify-center overflow-hidden">
+      <Link href={`/snack/${snack.id}`} className="block h-full">
+        <div className="relative h-52 overflow-hidden bg-[#f5efe6]">
           {snack.image ? (
             <Image
               src={snack.image}
@@ -45,26 +45,37 @@ export function SnackCard({ snack }: SnackCardProps) {
               className="object-cover group-hover:scale-105 transition-transform duration-500"
             />
           ) : (
-            <div className="text-6xl group-hover:scale-110 transition-transform duration-500">
+            <div className="flex h-full items-center justify-center text-6xl transition-transform duration-500 group-hover:scale-110">
               {getEmoji(snack.category)}
             </div>
           )}
+          <div className="absolute left-4 top-4 rounded-full bg-white/90 px-3 py-1 text-xs font-bold text-dark shadow-sm">
+            {snack.brand}
+          </div>
+          <div className="absolute bottom-4 right-4 rounded-full bg-dark/90 px-3 py-1 text-xs font-bold text-white shadow-sm">
+            {snack.tags[0] || "精选"}
+          </div>
         </div>
         <div className="p-5">
-          <div className="flex items-center gap-2 mb-1.5">
-            <span className="text-xs px-2 py-0.5 rounded-full bg-primary/15 text-primary font-medium">
-              {snack.tags[0]}
+          <div className="mb-3 flex items-start justify-between gap-3">
+            <div>
+              <h3 className="text-xl font-black leading-tight text-dark transition-colors group-hover:text-primary">
+                {snack.name}
+              </h3>
+              <p className="mt-1 text-sm font-medium text-dark/50 line-clamp-1">{snack.subtitle}</p>
+            </div>
+            <span className="rounded-full bg-primary/10 px-2.5 py-1 text-xs font-black text-primary">
+              {snack.rating.toFixed(1)}
             </span>
-            <span className="text-xs text-dark/40">{snack.brand}</span>
           </div>
-          <h3 className="text-lg font-bold text-dark mb-1 group-hover:text-primary transition-colors">
-            {snack.name}
-          </h3>
-          <p className="text-sm text-dark/50 mb-3 line-clamp-1">{snack.subtitle}</p>
-          <RatingStars rating={snack.rating} size="sm" label="口感评分" />
-          <p className="mt-2 text-sm text-dark/60 line-clamp-2 leading-relaxed">
-            {snack.review} <span className="text-xs text-primary/50">← 拖到右下角喂猫</span>
+          <RatingStars rating={snack.rating} size="sm" label="口感评分" showNumber={false} />
+          <p className="mt-3 text-sm leading-6 text-dark/60 line-clamp-2">
+            {snack.review}
           </p>
+          <div className="mt-5 flex items-center justify-between border-t border-dark/10 pt-4">
+            <span className="text-xs font-bold text-dark/40">拖动卡片可试喂右下角</span>
+            <span className="text-sm font-black text-dark transition group-hover:text-primary">查看详情</span>
+          </div>
         </div>
       </Link>
     </article>

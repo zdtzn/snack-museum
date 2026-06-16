@@ -7,13 +7,16 @@ interface SnackCardListProps {
 
 export function SnackCardList({ snacks }: SnackCardListProps) {
   return (
-    <section className="max-w-6xl mx-auto px-4 py-12">
-      <div className="flex items-center gap-3 mb-8">
-        <h2 className="text-2xl font-extrabold text-dark">
-          好物精选
-        </h2>
-        <span className="text-sm text-dark/40 font-medium">
-          共 {snacks.length} 款
+    <section id="snack-list" className="mx-auto max-w-6xl px-4 py-14">
+      <div className="mb-8 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <p className="text-xs font-bold uppercase tracking-[0.18em] text-primary">curated shelf</p>
+          <h2 className="mt-1 text-3xl font-black tracking-tight text-dark">
+            好物精选
+          </h2>
+        </div>
+        <span className="text-sm font-medium text-dark/45">
+          当前展示 {snacks.length} 款
         </span>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">

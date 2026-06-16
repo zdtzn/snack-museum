@@ -1,17 +1,17 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-background: #fff8f0;
-  --color-foreground: #2d3436;
+  --color-background: #f7f1e8;
+  --color-foreground: #22303a;
 
-  --color-primary: #ffb347;
-  --color-primary-light: #ffd08a;
-  --color-accent: #ff8c69;
-  --color-pink: #ff6b81;
-  --color-green: #7bed9f;
-  --color-dark: #2d3436;
-  --color-cream: #fff8f0;
-  --color-card: rgba(255, 255, 255, 0.75);
+  --color-primary: #d99031;
+  --color-primary-light: #f1c36d;
+  --color-accent: #d96d57;
+  --color-pink: #c96f8c;
+  --color-green: #4f8f6b;
+  --color-dark: #22303a;
+  --color-cream: #fbf6ef;
+  --color-card: rgba(255, 255, 255, 0.82);
 
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
@@ -19,30 +19,30 @@
   --radius-sm: 0.5rem;
   --radius-md: 0.75rem;
   --radius-lg: 1rem;
-  --radius-xl: 1.5rem;
+  --radius-xl: 1.25rem;
 }
 
 /* 玻璃拟态卡片 */
 .glass {
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.78);
   border-radius: var(--radius-lg);
 }
 
 /* 玻璃拟态厚版 */
 .glass-heavy {
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.92);
   border-radius: var(--radius-xl);
 }
 
 /* 渐变文字 */
 .gradient-text {
-  background: linear-gradient(135deg, #ffb347, #ff8c69);
+  background: linear-gradient(135deg, #d99031, #d96d57);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -77,11 +77,11 @@
 
 /* 卡片悬浮动画 */
 .card-hover {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 .card-hover:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 40px rgba(255, 140, 105, 0.15);
+  transform: translateY(-3px);
+  box-shadow: 0 18px 40px rgba(34, 48, 58, 0.08);
 }
 
 /* 随机抽取器翻转动画 */
@@ -104,7 +104,15 @@
 }
 
 body {
-  background: var(--color-cream);
+  background:
+    radial-gradient(circle at top left, rgba(241, 195, 109, 0.22), transparent 28%),
+    radial-gradient(circle at top right, rgba(217, 109, 87, 0.12), transparent 24%),
+    linear-gradient(180deg, #fffdf9 0%, #f7f1e8 100%);
   color: var(--color-dark);
   font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+::selection {
+  background: rgba(217, 144, 49, 0.2);
+  color: var(--color-dark);
 }
