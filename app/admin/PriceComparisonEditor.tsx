@@ -1,10 +1,28 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Save, PenLine, Upload } from "lucide-react";
+import { Save, PenLine } from "lucide-react";
+import Image from "next/image";
+
+interface PriceComparisonData {
+  leftImage?: string;
+  leftTitle?: string;
+  leftDesc?: string;
+  leftBadge?: string;
+  leftPriceLabel?: string;
+  leftPriceValue?: string;
+  rightImage?: string;
+  rightTitle?: string;
+  rightDesc?: string;
+  rightBadge?: string;
+  rightPriceLabel?: string;
+  rightPriceValue?: string;
+  ctaText?: string;
+  ctaSub?: string;
+}
 
 export function PriceComparisonEditor() {
-  const [data, setData] = useState<any>(null);
+  const [data, setData] = useState<PriceComparisonData | null>(null);
   const [editing, setEditing] = useState(false);
   const [saving, setSaving] = useState(false);
   const [msg, setMsg] = useState("");
@@ -164,13 +182,13 @@ export function PriceComparisonEditor() {
           <div className="grid grid-cols-2 gap-4">
             <div className="relative h-40 rounded-xl overflow-hidden bg-zinc-700 flex items-center justify-center text-white font-bold">
               {data.leftImage ? (
-                <img src={data.leftImage} alt="" className="absolute inset-0 w-full h-full object-cover opacity-60" />
+                <Image src={data.leftImage} alt="左侧背景预览" fill sizes="(min-width: 640px) 50vw, 100vw" className="object-cover opacity-60" unoptimized />
               ) : null}
               <span className="relative z-10 text-3xl">{data.leftBadge}</span>
             </div>
             <div className="relative h-40 rounded-xl overflow-hidden bg-amber-500 flex items-center justify-center text-white font-bold">
               {data.rightImage ? (
-                <img src={data.rightImage} alt="" className="absolute inset-0 w-full h-full object-cover opacity-60" />
+                <Image src={data.rightImage} alt="右侧背景预览" fill sizes="(min-width: 640px) 50vw, 100vw" className="object-cover opacity-60" unoptimized />
               ) : null}
               <span className="relative z-10 text-3xl">{data.rightBadge}</span>
             </div>
@@ -190,16 +208,16 @@ function ImageUploader({
   editing,
   onUpload,
 }: {
-  currentUrl: string;
+  currentUrl?: string;
   editing: boolean;
   onUpload: (file: File) => void;
 }) {
   return (
     <label className="flex items-center gap-3 p-3 bg-white/50 border border-dashed border-primary/30 rounded-lg cursor-pointer hover:bg-primary/5">
       {currentUrl ? (
-        <img src={currentUrl} alt="" className="w-16 h-16 rounded-lg object-cover" />
+        <Image src={currentUrl} alt="已上传图片" width={64} height={64} className="rounded-lg object-cover" unoptimized />
       ) : (
-        <div className="w-16 h-16 rounded-lg bg-white flex items-center justify-center text-2xl">🖼️</div>
+        <div className="w-16 h-16 rounded-lg bg-white flex items-center justify-center text-2xl" aria-hidden="true">🖼️</div>
       )}
       <div>
         <p className="text-xs font-bold text-dark">{currentUrl ? "点击更换图片" : "点击上传图片"}</p>

@@ -1,10 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useAboutData } from "@/lib/useAboutData";
 
 export function AboutUs() {
-  const [data, setData] = useState<any>(null);
-  useEffect(() => { fetch("/api/about").then(r=>r.json()).then(d=>setData(d.aboutUs)); }, []);
+  const data = useAboutData("aboutUs");
   if (!data) return null;
 
   return (
@@ -17,9 +16,9 @@ export function AboutUs() {
         <p className="text-dark/70 leading-relaxed text-sm sm:text-base">{data.content}</p>
       </div>
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-        {data.stats.map((item: any, i: number) => (
+        {data.stats.map((item, i) => (
           <div key={i} className="glass p-5 text-center card-hover">
-            <p className="text-3xl mb-2">{item.icon}</p>
+            <p className="text-3xl mb-2" aria-hidden="true">{item.icon}</p>
             <p className="text-2xl font-extrabold gradient-text">{item.num}</p>
             <p className="text-xs text-dark/40 mt-1">{item.label}</p>
           </div>

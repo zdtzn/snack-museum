@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
+import { validateObject } from "@/lib/validate";
 
 const DATA_PATH = path.join(process.cwd(), "data", "about-data.json");
 
@@ -10,7 +11,26 @@ export async function GET() {
 }
 
 export async function POST(request: NextRequest) {
-  const body = await request.json();
-  fs.writeFileSync(DATA_PATH, JSON.stringify(body, null, 2), "utf-8");
+  let body: unknown;
+  try {
+    body = await request.json();
+  } catch {
+    return NextResponse.json({ error: "无效的 JSON" }, { status: 400 });
+  }
+
+  const validation = validateObject(body);
+  if (!validation.ok) {
+    return NextResponse.json({ error: validation.error }, { status: 400 });
+  }
+
+  // 限制 JSON 大小（防超大 payload）
+  const serialized = JSON.stringify(body, null, 2);
+  if (serialized.length > 200 * 1024) {
+    return NextResponse.json({ error: "数据过大（超过 200KB）" }, { status: 413 });
+  }
+
+  const tmpPath = DATA_PATH + ".tmp";
+  fs.writeFileSync(tmpPath, serialized, "utf-8");
+  fs.renameSync(tmpPath, DATA_PATH);
   return NextResponse.json({ success: true });
 }

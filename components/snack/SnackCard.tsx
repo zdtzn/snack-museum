@@ -1,6 +1,8 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
-import { Snack } from "@/lib/snacks";
+import { Snack, SnackCategory, CATEGORY_EMOJIS } from "@/lib/snacks";
 import { RatingStars } from "./RatingStars";
 
 interface SnackCardProps {
@@ -45,8 +47,8 @@ export function SnackCard({ snack }: SnackCardProps) {
               className="object-cover group-hover:scale-105 transition-transform duration-500"
             />
           ) : (
-            <div className="flex h-full items-center justify-center text-6xl transition-transform duration-500 group-hover:scale-110">
-              {getEmoji(snack.category)}
+            <div className="flex h-full items-center justify-center text-6xl transition-transform duration-500 group-hover:scale-110" aria-hidden="true">
+              {CATEGORY_EMOJIS[snack.category as SnackCategory] || "🍪"}
             </div>
           )}
           <div className="absolute left-4 top-4 rounded-full bg-white/90 px-3 py-1 text-xs font-bold text-dark shadow-sm">
@@ -80,12 +82,4 @@ export function SnackCard({ snack }: SnackCardProps) {
       </Link>
     </article>
   );
-}
-
-function getEmoji(category: string): string {
-  const map: Record<string, string> = {
-    puffed: "🍿", candy: "🍬", "spicy-snack": "🌶",
-    "instant-food": "🍜", beverage: "🥤", healthy: "🥗",
-  };
-  return map[category] || "🍪";
 }

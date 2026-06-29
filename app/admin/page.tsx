@@ -24,6 +24,7 @@ export default function AdminPage() {
   const [showForm, setShowForm] = useState(false);
   const [form, setForm] = useState(emptyForm());
   const [uploading, setUploading] = useState(false);
+  const [tagInput, setTagInput] = useState("");
 
   const loadSnacks = async () => {
     const res = await fetch("/api/snacks");
@@ -61,8 +62,11 @@ export default function AdminPage() {
 
   const handleSave = async () => {
     if (!form.name || !form.brand) return;
-    const tagInput = (document.getElementById("tagInput") as HTMLInputElement)?.value;
-    const tags = tagInput ? tagInput.split(",").map((t: string) => t.trim()).filter(Boolean) : [];
+    // 同时支持中英文逗号分割
+    const tags = tagInput
+      .split(/[,，]/)
+      .map((t) => t.trim())
+      .filter(Boolean);
 
     const payload = { ...form, tags };
     if (editing) {
@@ -88,10 +92,11 @@ export default function AdminPage() {
     setEditing(snack);
     setForm({
       name: snack.name, subtitle: snack.subtitle, category: snack.category,
-      brand: snack.brand, image: snack.image, rating: snack.rating,
+      brand: snack.brand, image: snack.image || "", rating: snack.rating,
       tags: [...snack.tags], review: snack.review, date: snack.date,
       wechat: snack.wechat || "", phone: snack.phone || "",
     });
+    setTagInput(snack.tags.join("，"));
     setShowForm(true);
   };
 
@@ -124,7 +129,7 @@ export default function AdminPage() {
           <h1 className="text-3xl font-extrabold gradient-text mb-1">🛠️ 管理后台</h1>
           <p className="text-sm text-dark/40">共 {snacks.length} 款产品</p>
         </div>
-        <button onClick={() => { setEditing(null); setForm(emptyForm()); setShowForm(true); }}
+        <button onClick={() => { setEditing(null); setForm(emptyForm()); setTagInput(""); setShowForm(true); }}
           className="flex items-center gap-2 px-5 py-2.5 bg-primary text-white font-bold rounded-xl shadow-lg shadow-primary/20 hover:scale-105 transition-all">
           <Plus size={18} />添加产品
         </button>
@@ -135,7 +140,7 @@ export default function AdminPage() {
         <div className="fixed inset-0 z-50 flex items-start justify-center pt-10 p-4 bg-dark/40 backdrop-blur-sm overflow-y-auto">
           <div className="glass-heavy w-full max-w-2xl p-6 relative">
             <button onClick={() => { setShowForm(false); setEditing(null); }}
-              className="absolute top-4 right-4 text-dark/30 hover:text-dark/60"><X size={20} /></button>
+              className="absolute top-4 right-4 text-dark/30 hover:text-dark/60" aria-label="关闭"><X size={20} /></button>
             <h2 className="text-xl font-extrabold text-dark mb-6">{editing ? "编辑" : "添加产品"}</h2>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -185,9 +190,10 @@ export default function AdminPage() {
                   placeholder="选填" />
               </div>
               <div className="sm:col-span-2">
-                <label className="block text-sm font-bold text-dark/60 mb-1">标签（逗号分隔）</label>
-                <input id="tagInput" defaultValue={form.tags?.join("，") || ""}
-                  className="w-full px-3 py-2 bg-white/70 border border-primary/20 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/30" />
+                <label htmlFor="tagInput" className="block text-sm font-bold text-dark/60 mb-1">标签（逗号分隔）</label>
+                <input id="tagInput" value={tagInput} onChange={(e) => setTagInput(e.target.value)}
+                  className="w-full px-3 py-2 bg-white/70 border border-primary/20 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
+                  placeholder="云南特产，传统糕点" />
               </div>
               <div className="sm:col-span-2">
                 <label className="block text-sm font-bold text-dark/60 mb-1">简介</label>

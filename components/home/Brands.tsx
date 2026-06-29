@@ -1,10 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useAboutData } from "@/lib/useAboutData";
 
 export function Brands() {
-  const [data, setData] = useState<any>(null);
-  useEffect(() => { fetch("/api/about").then(r=>r.json()).then(d=>setData(d.brands)); }, []);
+  const data = useAboutData("brands");
   if (!data) return null;
 
   return (
@@ -13,9 +12,9 @@ export function Brands() {
         <h2 className="text-3xl sm:text-4xl font-extrabold gradient-text mb-3">{data.title}</h2>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {data.items.map((b: any, i: number) => (
+        {data.items.map((b, i) => (
           <div key={i} className={`glass p-5 card-hover flex items-start gap-4 ${b.highlight ? "border-2 border-primary/30" : ""}`}>
-            {b.image ? <img src={b.image} alt="" className="w-10 h-10 rounded-lg object-cover shrink-0" /> : <div className="text-4xl shrink-0">{b.emoji || "🍪"}</div>}
+            <div className="text-4xl shrink-0" aria-hidden="true">{b.emoji || "🍪"}</div>
             <div>
               <div className="flex items-center gap-2 mb-1">
                 <h3 className="font-extrabold text-dark text-sm">{b.name}</h3>

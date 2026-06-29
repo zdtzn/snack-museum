@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { readSnacks, writeSnacks } from "@/lib/db";
+import { validateSnackInput, sanitizeSnack } from "@/lib/validate";
 
 // PUT /api/snacks/[id] — 编辑零食
 export async function PUT(
@@ -7,7 +8,20 @@ export async function PUT(
   { params }: { params: Promise<{ id: string }> }
 ) {
   const { id } = await params;
-  const body = await request.json();
+
+  let body: unknown;
+  try {
+    body = await request.json();
+  } catch {
+    return NextResponse.json({ error: "无效的 JSON" }, { status: 400 });
+  }
+
+  const validation = validateSnackInput(body);
+  if (!validation.ok) {
+    return NextResponse.json({ error: validation.error }, { status: 400 });
+  }
+
+  const safeInput = sanitizeSnack(body as Record<string, unknown>);
   const snacks = readSnacks();
 
   const index = snacks.findIndex((s) => s.id === id);
@@ -15,7 +29,7 @@ export async function PUT(
     return NextResponse.json({ error: "Not found" }, { status: 404 });
   }
 
-  snacks[index] = { ...snacks[index], ...body, id }; // 保持 id 不变
+  snacks[index] = { ...snacks[index], ...safeInput, id }; // 保持 id 不变
   writeSnacks(snacks);
 
   return NextResponse.json({ snack: snacks[index] });

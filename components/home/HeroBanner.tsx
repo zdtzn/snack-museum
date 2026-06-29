@@ -1,3 +1,5 @@
+"use client";
+
 export function HeroBanner() {
   return (
     <section className="relative overflow-hidden px-4 pb-20 pt-12 sm:pt-16">

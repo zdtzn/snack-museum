@@ -1,10 +1,27 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Save, Plus, Trash2, PenLine, X } from "lucide-react";
+import { Save, Plus, PenLine, X } from "lucide-react";
+import Image from "next/image";
+import type {
+  AboutData,
+  AboutStat,
+  BrandItem,
+  StoreAddress,
+  TestimonialItem,
+} from "@/lib/about";
+
+// 编辑器内部使用的扩展类型（brands.items 可能带 image 字段，用于后台预览）
+interface BrandItemWithImage extends BrandItem {
+  image?: string;
+}
+
+interface EditableAboutData extends AboutData {
+  brands: { title: string; items: BrandItemWithImage[] };
+}
 
 export function AboutEditor() {
-  const [data, setData] = useState<any>(null);
+  const [data, setData] = useState<EditableAboutData | null>(null);
   const [editing, setEditing] = useState(false);
   const [saving, setSaving] = useState(false);
   const [msg, setMsg] = useState("");
@@ -15,16 +32,27 @@ export function AboutEditor() {
 
   const save = async () => {
     setSaving(true);
-    const res = await fetch("/api/about", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) });
+    await fetch("/api/about", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) });
     setSaving(false);
     setEditing(false);
     setMsg("✅ 已保存");
     setTimeout(() => setMsg(""), 2000);
   };
 
-  const update = (section: string, field: string, value: any) => {
-    setData((prev: any) => ({ ...prev, [section]: { ...prev[section], [field]: value } }));
-  };
+  function update<K extends keyof EditableAboutData, F extends keyof EditableAboutData[K]>(
+    section: K,
+    field: F,
+    value: EditableAboutData[K][F]
+  ) {
+    setData((prev) => {
+      if (!prev) return prev;
+      const sectionData = prev[section] as Record<string, unknown>;
+      return {
+        ...prev,
+        [section]: { ...sectionData, [field as string]: value },
+      };
+    });
+  }
 
   const input = "w-full px-3 py-2 bg-white border border-primary/20 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/30";
   const lbl = "block text-sm font-bold text-dark/60 mb-1";
@@ -32,6 +60,7 @@ export function AboutEditor() {
   // 图片上传
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
     const file = e.target.files?.[0]; if (!file) return;
+    if (!data) return;
     const fd = new FormData(); fd.append("file", file);
     const res = await fetch("/api/upload", { method: "POST", body: fd });
     const json = await res.json();
@@ -77,7 +106,7 @@ export function AboutEditor() {
             <div className="mb-2"><label className={lbl}>副标题</label><input className={input} value={data.aboutUs?.subtitle||""} onChange={e=>update("aboutUs","subtitle",e.target.value)} /></div>
             <div className="mb-2"><label className={lbl}>正文</label><textarea rows={3} className={input} value={data.aboutUs?.content||""} onChange={e=>update("aboutUs","content",e.target.value)} /></div>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-              {(data.aboutUs?.stats||[]).map((s:any,i:number)=>(
+              {(data.aboutUs?.stats||[]).map((s: AboutStat, i: number) => (
                 <div key={i} className="text-center">
                   <input className={`${input} text-center`} placeholder="Emoji" value={s.icon} onChange={e=>{const st=[...data.aboutUs.stats];st[i].icon=e.target.value;update("aboutUs","stats",st)}} />
                   <input className={`${input} text-center mt-1`} placeholder="数字" value={s.num} onChange={e=>{const st=[...data.aboutUs.stats];st[i].num=e.target.value;update("aboutUs","stats",st)}} />
@@ -92,7 +121,7 @@ export function AboutEditor() {
             <p className="text-xs text-dark/40">{data.aboutUs?.subtitle}</p>
             <p className="text-sm text-dark/70 mt-2">{data.aboutUs?.content}</p>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mt-3">
-              {(data.aboutUs?.stats||[]).map((s:any,i:number)=>(
+              {(data.aboutUs?.stats||[]).map((s: AboutStat, i: number) => (
                 <div key={i} className="text-center"><p className="text-xl">{s.icon}</p><p className="font-extrabold gradient-text">{s.num}</p><p className="text-xs text-dark/40">{s.label}</p></div>
               ))}
             </div>
@@ -103,13 +132,17 @@ export function AboutEditor() {
       {/* ======== 王牌产品 ======== */}
       <Block title="🏆 王牌产品线">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          {(data.brands?.items||[]).map((b:any,i:number)=>(
+          {(data.brands?.items||[]).map((b: BrandItemWithImage, i: number) => (
             <div key={i} className="glass p-3">
               {editing ? (
                 <>
                   <div className="flex items-center gap-2 mb-2">
                     <label className="w-16 h-16 rounded-xl bg-white/50 border border-dashed border-primary/30 flex items-center justify-center text-2xl cursor-pointer hover:bg-primary/5 shrink-0 relative overflow-hidden">
-                      {b.image ? <img src={b.image} alt="" className="w-full h-full object-cover" /> : <span>🖼️</span>}
+                      {b.image ? (
+                        <Image src={b.image} alt={b.name} fill sizes="64px" className="object-cover" unoptimized />
+                      ) : (
+                        <span aria-hidden="true">🖼️</span>
+                      )}
                       <input type="file" accept="image/*" onChange={(e)=>handleImageUpload(e,i)} className="absolute inset-0 opacity-0 cursor-pointer" />
                     </label>
                     <div className="flex-1">
@@ -117,12 +150,16 @@ export function AboutEditor() {
                       <input className={`${input} text-xs mb-1`} value={b.name} placeholder="名称" onChange={e=>{const it=[...data.brands.items];it[i].name=e.target.value;update("brands","items",it)}} />
                       <input className={`${input} text-xs`} value={b.desc} placeholder="一句话卖点" onChange={e=>{const it=[...data.brands.items];it[i].desc=e.target.value;update("brands","items",it)}} />
                     </div>
-                    <button onClick={()=>{const it=[...data.brands.items];it.splice(i,1);update("brands","items",it)}} className="text-pink/50 hover:text-pink"><X size={14}/></button>
+                    <button onClick={()=>{const it=[...data.brands.items];it.splice(i,1);update("brands","items",it)}} className="text-pink/50 hover:text-pink" aria-label="删除"><X size={14}/></button>
                   </div>
                 </>
               ) : (
                 <div className="flex items-center gap-3">
-                  {b.image ? <img src={b.image} alt="" className="w-10 h-10 rounded-lg object-cover" /> : <span className="text-2xl">{b.emoji||"🍪"}</span>}
+                  {b.image ? (
+                    <Image src={b.image} alt={b.name} width={40} height={40} className="rounded-lg object-cover" unoptimized />
+                  ) : (
+                    <span className="text-2xl" aria-hidden="true">{b.emoji||"🍪"}</span>
+                  )}
                   <div>
                     <div className="flex items-center gap-1"><span className="font-extrabold text-dark text-sm">{b.name}</span>{b.highlight&&<span className="text-[10px] bg-primary/15 text-primary font-bold px-1 rounded-full">爆款</span>}</div>
                     <p className="text-xs text-dark/50">{b.desc}</p>
@@ -140,13 +177,13 @@ export function AboutEditor() {
 
       {/* ======== 店铺地址 ======== */}
       <Block title="📍 店铺地址">
-        {(data.stores?.addresses||[]).map((a:any,i:number)=>(
+        {(data.stores?.addresses||[]).map((a: StoreAddress, i: number) => (
           <div key={i} className="mb-2">
             {editing ? (
               <div className="flex gap-2">
                 <input className={`${input} w-32`} value={a.label} placeholder="名称" onChange={e=>{const ad=[...data.stores.addresses];ad[i].label=e.target.value;update("stores","addresses",ad)}} />
                 <input className={`${input} flex-1`} value={a.addr} placeholder="地址" onChange={e=>{const ad=[...data.stores.addresses];ad[i].addr=e.target.value;update("stores","addresses",ad)}} />
-                {editing&&<button onClick={()=>{const ad=[...data.stores.addresses];ad.splice(i,1);update("stores","addresses",ad)}} className="text-pink/50 hover:text-pink"><X size={14}/></button>}
+                {editing&&<button onClick={()=>{const ad=[...data.stores.addresses];ad.splice(i,1);update("stores","addresses",ad)}} className="text-pink/50 hover:text-pink" aria-label="删除"><X size={14}/></button>}
               </div>
             ) : (
               <p className="text-sm"><span className="font-bold text-primary">{a.label}</span> · {a.addr}</p>
@@ -173,13 +210,13 @@ export function AboutEditor() {
       {/* ======== 客户评价 ======== */}
       <Block title="💬 客户评价">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          {(data.testimonials?.items||[]).map((t:any,i:number)=>(
+          {(data.testimonials?.items||[]).map((t: TestimonialItem, i: number) => (
             <div key={i} className="glass p-3">
               <textarea rows={2} className={`${input} text-xs`} value={t.text} readOnly={!editing} onChange={e=>{const it=[...data.testimonials.items];it[i].text=e.target.value;update("testimonials","items",it)}} />
               <div className="flex gap-2 mt-1">
                 <input className={`${input} flex-1 text-xs`} value={t.name} readOnly={!editing} placeholder="名字" onChange={e=>{const it=[...data.testimonials.items];it[i].name=e.target.value;update("testimonials","items",it)}} />
                 <input className={`${input} flex-1 text-xs`} value={t.role} readOnly={!editing} placeholder="角色" onChange={e=>{const it=[...data.testimonials.items];it[i].role=e.target.value;update("testimonials","items",it)}} />
-                {editing&&<button onClick={()=>{const it=[...data.testimonials.items];it.splice(i,1);update("testimonials","items",it)}} className="text-pink/50 hover:text-pink"><X size={14}/></button>}
+                {editing&&<button onClick={()=>{const it=[...data.testimonials.items];it.splice(i,1);update("testimonials","items",it)}} className="text-pink/50 hover:text-pink" aria-label="删除"><X size={14}/></button>}
               </div>
             </div>
           ))}

@@ -1,36 +1,48 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 鑫安好物优选 (Snack Museum)
 
-## Getting Started
+精选好物，品质生活。基于 Next.js 16 + React 19 + TypeScript + Tailwind CSS v4 的零食批发展示网站。
 
-First, run the development server:
+## 功能模块
+
+- **首页** — Hero banner、分类筛选、零食卡片、价格对比、投喂猫咪交互
+- **好物精选** — 按口感评分排序的排行榜
+- **随机抽零食** — 不知道吃啥时的随机抽取
+- **零食详情** — 单品详情页（带 SEO metadata）
+- **零食人格测试** — 5 题测出你的零食人格，可生成分享海报
+- **关于我们** — 品牌、店铺、合作、评价展示
+- **管理后台** — 产品 / 关于 / 客服 / 价格对比的增删改查（Basic Auth 鉴权）
+
+## 技术栈
+
+- Next.js 16.2.6（App Router）
+- React 19.2.4
+- TypeScript 5（strict）
+- Tailwind CSS v4
+- framer-motion（动画）
+- html2canvas（测试结果海报截图）
+- Cloudinary（图片上传，签名上传模式）
+
+## 开始使用
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+打开 http://localhost:3000
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 环境变量
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+ADMIN_USERNAME=admin
+ADMIN_PASSWORD=<your-password>
+CLOUDINARY_CLOUD_NAME=<your-cloud-name>
+CLOUDINARY_API_KEY=<your-api-key>
+CLOUDINARY_API_SECRET=<your-api-secret>
+```
 
-## Learn More
+管理后台：`/admin`，使用 Basic Auth 鉴权。
 
-To learn more about Next.js, take a look at the following resources:
+## 部署
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+项目内置 `render.yaml`，可直接部署到 Render.com。

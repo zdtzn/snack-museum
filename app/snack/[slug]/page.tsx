@@ -1,5 +1,4 @@
-export const dynamic = "force-dynamic";
-
+import type { Metadata } from "next";
 import { getSnacks } from "@/lib/data";
 import { notFound } from "next/navigation";
 import Image from "next/image";
@@ -7,6 +6,39 @@ import Link from "next/link";
 import { RatingStars } from "@/components/snack/RatingStars";
 import { CustomerServiceButton } from "@/components/snack/CustomerServiceButton";
 import { CATEGORY_EMOJIS, CATEGORY_LABELS } from "@/lib/snacks";
+
+// ISR：每 60 秒重新生成
+export const revalidate = 60;
+
+export async function generateStaticParams() {
+  const snacks = getSnacks();
+  return snacks.map((s) => ({ slug: s.id }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const snacks = getSnacks();
+  const snack = snacks.find((s) => s.id === slug);
+  if (!snack) {
+    return { title: "零食未找到" };
+  }
+  return {
+    title: `${snack.name} - ${snack.brand} | 鑫安好物优选`,
+    description: snack.subtitle
+      ? `${snack.subtitle}。${snack.review.slice(0, 80)}`
+      : snack.review.slice(0, 120),
+    openGraph: {
+      title: `${snack.name} - ${snack.brand}`,
+      description: snack.subtitle,
+      images: snack.image ? [{ url: snack.image }] : undefined,
+      type: "article",
+    },
+  };
+}
 
 export default async function SnackDetail({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
@@ -33,7 +65,7 @@ export default async function SnackDetail({ params }: { params: Promise<{ slug: 
               priority
             />
           ) : (
-            <span className="text-8xl">{CATEGORY_EMOJIS[snack.category]}</span>
+            <span className="text-8xl" aria-hidden="true">{CATEGORY_EMOJIS[snack.category]}</span>
           )}
         </div>
 

@@ -1,10 +1,25 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-import { Save, PenLine, Plus, X, Upload } from "lucide-react";
+import { Save, PenLine, Plus, X } from "lucide-react";
+import Image from "next/image";
+
+interface CityData {
+  name: string;
+  wechat: string;
+  phone?: string;
+  image?: string;
+}
+interface ProvinceData {
+  name: string;
+  cities: CityData[];
+}
+interface CustomerServiceData {
+  provinces: ProvinceData[];
+}
 
 export function CustomerEditor() {
-  const [data, setData] = useState<any>(null);
+  const [data, setData] = useState<CustomerServiceData | null>(null);
   const [editing, setEditing] = useState(false);
   const [saving, setSaving] = useState(false);
 
@@ -21,7 +36,7 @@ export function CustomerEditor() {
     setEditing(false);
   };
 
-  const uploadImage = async (file: File) => {
+  const uploadImage = async (file: File): Promise<string> => {
     const fd = new FormData(); fd.append("file", file);
     const res = await fetch("/api/upload", { method: "POST", body: fd });
     const json = await res.json();
@@ -53,41 +68,45 @@ export function CustomerEditor() {
         </div>
       </div>
 
-      {provinces.map((p: any, pi: number) => (
+      {provinces.map((p: ProvinceData, pi: number) => (
         <div key={pi} className="glass p-4 mb-4">
           <div className="flex items-center gap-2 mb-3">
             {editing ? (
               <input className={`${inp} w-32 font-bold`} value={p.name} onChange={e => {
-                const np = [...provinces]; np[pi].name = e.target.value; setData({ provinces: np });
+                const np = [...provinces]; np[pi] = { ...np[pi], name: e.target.value }; setData({ provinces: np });
               }} />
             ) : (
               <h4 className="text-base font-extrabold text-dark">{p.name}</h4>
             )}
             {editing && (
               <button onClick={() => { const np = [...provinces]; np.splice(pi, 1); setData({ provinces: np }); }}
-                className="text-pink/50 hover:text-pink"><X size={14} /></button>
+                className="text-pink/50 hover:text-pink" aria-label="删除省份"><X size={14} /></button>
             )}
           </div>
 
           {/* 城市列表 */}
           <div className="space-y-3">
-            {(p.cities || []).map((c: any, ci: number) => (
+            {(p.cities || []).map((c: CityData, ci: number) => (
               <div key={ci} className="flex items-start gap-3 p-2 bg-white/40 rounded-lg">
                 {/* 微信二维码图片 */}
                 <label className="w-12 h-12 rounded-lg bg-white/50 border border-dashed border-primary/30 flex items-center justify-center shrink-0 cursor-pointer hover:bg-primary/5 relative overflow-hidden">
-                  {c.image ? <img src={c.image} alt="" className="w-full h-full object-cover" /> : <span className="text-lg">📷</span>}
+                  {c.image ? (
+                    <Image src={c.image} alt={`${c.name}客服微信二维码`} fill sizes="48px" className="object-cover" unoptimized />
+                  ) : (
+                    <span className="text-lg" aria-hidden="true">📷</span>
+                  )}
                   {editing && <input type="file" accept="image/*" className="absolute inset-0 opacity-0 cursor-pointer" onChange={async (e) => {
                     const file = e.target.files?.[0]; if (!file) return;
                     const url = await uploadImage(file);
-                    if (url) { const np = [...provinces]; np[pi].cities[ci].image = url; setData({ provinces: np }); }
+                    if (url) { const np = [...provinces]; np[pi].cities[ci] = { ...np[pi].cities[ci], image: url }; setData({ provinces: np }); }
                   }} />}
                 </label>
                 {/* 城市名 + 微信号 */}
                 <div className="flex-1 space-y-1">
                   {editing ? (
                     <>
-                      <input className={`${inp}`} value={c.name} placeholder="城市名" onChange={e => { const np = [...provinces]; np[pi].cities[ci].name = e.target.value; setData({ provinces: np }); }} />
-                      <input className={`${inp}`} value={c.wechat} placeholder="微信号" onChange={e => { const np = [...provinces]; np[pi].cities[ci].wechat = e.target.value; setData({ provinces: np }); }} />
+                      <input className={`${inp}`} value={c.name} placeholder="城市名" onChange={e => { const np = [...provinces]; np[pi].cities[ci] = { ...np[pi].cities[ci], name: e.target.value }; setData({ provinces: np }); }} />
+                      <input className={`${inp}`} value={c.wechat} placeholder="微信号" onChange={e => { const np = [...provinces]; np[pi].cities[ci] = { ...np[pi].cities[ci], wechat: e.target.value }; setData({ provinces: np }); }} />
                     </>
                   ) : (
                     <>
@@ -97,15 +116,15 @@ export function CustomerEditor() {
                   )}
                 </div>
                 {editing && (
-                  <button onClick={() => { const np = [...provinces]; np[pi].cities.splice(ci, 1); setData({ provinces: np }); }}
-                    className="text-pink/50 hover:text-pink shrink-0"><X size={14} /></button>
+                  <button onClick={() => { const np = [...provinces]; np[pi] = { ...np[pi], cities: np[pi].cities.filter((_, i) => i !== ci) }; setData({ provinces: np }); }}
+                    className="text-pink/50 hover:text-pink shrink-0" aria-label="删除城市"><X size={14} /></button>
                 )}
               </div>
             ))}
           </div>
 
           {editing && (
-            <button onClick={() => { const np = [...provinces]; np[pi].cities.push({ name: "新城市", wechat: "kefu_new", image: "" }); setData({ provinces: np }); }}
+            <button onClick={() => { const np = [...provinces]; np[pi] = { ...np[pi], cities: [...np[pi].cities, { name: "新城市", wechat: "kefu_new", image: "" }] }; setData({ provinces: np }); }}
               className="mt-3 text-xs font-bold text-primary hover:text-accent flex items-center gap-1"><Plus size={12} />新增城市</button>
           )}
         </div>

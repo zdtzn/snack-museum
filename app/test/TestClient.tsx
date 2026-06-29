@@ -14,7 +14,7 @@ type Phase = "start" | "quiz" | "mixing" | "result";
 export function TestClient() {
   const [phase, setPhase] = useState<Phase>("start");
   const [currentQ, setCurrentQ] = useState(0);
-  const [answers, setAnswers] = useState<PersonalityId[]>([]);
+  const [, setAnswers] = useState<PersonalityId[]>([]);
   // 新增：明确缓存计算出来的结果，防止 React 异步渲染导致结果穿透或为 null
   const [finalResult, setFinalResult] = useState<PersonalityResult | null>(null);
   const [showCustomerService, setShowCustomerService] = useState(false);

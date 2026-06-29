@@ -4,7 +4,7 @@ export interface Snack {
   subtitle: string;
   category: SnackCategory;
   brand: string;
-  image: string;
+  image?: string;
   rating: number;
   tags: string[];
   review: string;

@@ -31,7 +31,12 @@ export function Header() {
           ))}
         </nav>
 
-        <button onClick={() => setOpen(!open)} className="sm:hidden text-dark/60 p-2 relative z-50">
+        <button
+          onClick={() => setOpen(!open)}
+          className="sm:hidden text-dark/60 p-2 relative z-50"
+          aria-label={open ? "关闭菜单" : "打开菜单"}
+          aria-expanded={open}
+        >
           {open ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>

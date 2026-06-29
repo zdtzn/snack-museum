@@ -2,8 +2,9 @@
 
 import { useState, useEffect } from "react";
 import { X } from "lucide-react";
+import Image from "next/image";
 
-interface CityData { name: string; wechat: string; phone?: string; }
+interface CityData { name: string; wechat: string; phone?: string; image?: string; }
 interface ProvinceData { name: string; cities: CityData[]; }
 
 interface Props { onClose: () => void; }
@@ -22,7 +23,7 @@ export function CustomerService({ onClose }: Props) {
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-dark/40 backdrop-blur-sm">
       <div className="glass-heavy w-full max-w-md p-6 relative max-h-[80vh] overflow-y-auto">
-        <button onClick={onClose} className="absolute top-4 right-4 text-dark/30 hover:text-dark/60"><X size={20} /></button>
+        <button onClick={onClose} className="absolute top-4 right-4 text-dark/30 hover:text-dark/60" aria-label="关闭"><X size={20} /></button>
         <div className="text-center mb-6">
           <p className="text-4xl mb-2">💬</p>
           <h3 className="text-xl font-extrabold gradient-text">联系客服微信</h3>
@@ -35,8 +36,8 @@ export function CustomerService({ onClose }: Props) {
           <div className="text-center">
             <div className="glass p-6 mb-4">
               <p className="text-lg font-bold text-dark mb-1">{selectedProvince} · {selectedCity.name}</p>
-              {(selectedCity as any).image && (
-                <img src={(selectedCity as any).image} alt="微信二维码" className="w-40 h-40 mx-auto my-3 object-contain rounded-xl border border-primary/10" />
+              {selectedCity.image && (
+                <Image src={selectedCity.image} alt={`${selectedCity.name}客服微信二维码`} width={160} height={160} className="w-40 h-40 mx-auto my-3 object-contain rounded-xl border border-primary/10" unoptimized />
               )}
               <div className="glass p-4 inline-block min-w-[200px] mt-1">
                 <p className="text-xs text-dark/40 mb-1">客服微信</p>
@@ -50,14 +51,15 @@ export function CustomerService({ onClose }: Props) {
           </div>
         ) : (
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-            {(selectedProvince ? currentProvince!.cities : provinces).map((item: any) => {
-              const name = item.cities ? item.name : item.name;
-              const isProvince = !!item.cities;
+              {(selectedProvince ? currentProvince!.cities : provinces).map((item: ProvinceData | CityData) => {
+              const isProvince = "cities" in item;
+              const name = item.name;
+              const cityCount = isProvince ? (item as ProvinceData).cities.length : 0;
               return (
-                <button key={name} onClick={() => isProvince ? setSelectedProvince(name) : setSelectedCity(item)}
+                <button key={name} onClick={() => isProvince ? setSelectedProvince(name) : setSelectedCity(item as CityData)}
                   className="glass p-3 text-center hover:bg-primary/5 hover:border-primary/20 border border-transparent rounded-xl transition-all">
                   <p className="text-sm font-bold text-dark">{name}</p>
-                  {isProvince && <p className="text-xs text-dark/30 mt-1">{item.cities.length}市</p>}
+                  {isProvince && <p className="text-xs text-dark/30 mt-1">{cityCount}市</p>}
                 </button>
               );
             })}

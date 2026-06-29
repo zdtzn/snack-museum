@@ -17,6 +17,7 @@ export function RandomPicker({ snacks, onClose }: RandomPickerProps) {
 
   const pickRandom = useCallback(() => {
     if (spinning) return;
+    if (snacks.length === 0) return;
     setSpinning(true);
     setShowCard(false);
     setTimeout(() => {
@@ -30,7 +31,7 @@ export function RandomPicker({ snacks, onClose }: RandomPickerProps) {
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-dark/40 backdrop-blur-sm">
       <div className="glass-heavy w-full max-w-md p-6 relative">
-        <button onClick={onClose} className="absolute top-4 right-4 text-dark/30 hover:text-dark/60">
+        <button onClick={onClose} className="absolute top-4 right-4 text-dark/30 hover:text-dark/60" aria-label="关闭">
           <X size={20} />
         </button>
         <div className="text-center mb-6">

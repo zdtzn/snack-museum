@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import { ArrowLeftRight, ShoppingBag, Truck } from "lucide-react";
+import Image from "next/image";
 
 interface PriceData {
   leftImage: string;
@@ -79,7 +80,7 @@ export function PriceComparison() {
         {/* ===== 右侧底图：鑫安批发 ===== */}
         <div className="absolute inset-0 bg-gradient-to-br from-orange-500 to-amber-600 flex flex-col justify-between p-6 sm:p-10 text-white">
           {d.rightImage && (
-            <img src={d.rightImage} alt="" className="absolute inset-0 w-full h-full object-cover opacity-50" />
+            <Image src={d.rightImage} alt="鑫安批发" fill sizes="(min-width: 640px) 100vw, 100vw" className="object-cover opacity-50" unoptimized />
           )}
           <div className="self-end text-right relative z-10">
             <span className="bg-white/20 backdrop-blur-sm text-xs px-3 py-1 rounded-full font-bold">
@@ -102,7 +103,7 @@ export function PriceComparison() {
           style={{ width: `${sliderPos}%` }}
         >
           {d.leftImage && (
-            <img src={d.leftImage} alt="" className="absolute inset-0 w-full h-full object-cover opacity-40" />
+            <Image src={d.leftImage} alt="普通零售" fill sizes="(min-width: 640px) 100vw, 100vw" className="object-cover opacity-40" unoptimized />
           )}
           <div className="w-[320px] sm:w-[400px] relative z-10">
             <span className="bg-black/20 text-xs px-3 py-1 rounded-full font-bold">
