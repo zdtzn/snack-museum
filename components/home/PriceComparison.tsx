@@ -27,9 +27,8 @@ export function PriceComparison() {
   const [data, setData] = useState<PriceData | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // 从 API 读取数据
   useEffect(() => {
-    fetch("/api/price-comparison").then(r => r.json()).then(setData);
+    fetch("/api/price-comparison").then((r) => r.json()).then(setData);
   }, []);
 
   const handleMove = (clientX: number) => {
@@ -40,109 +39,116 @@ export function PriceComparison() {
     setSliderPos(percentage);
   };
 
-  // 加载中或使用默认值
   const d = data || {
-    leftImage: "", leftTitle: "普通超市 / 街边便利店",
-    leftDesc: "层层中间商加价，货架租金贵，随便抓两包就超预算",
-    leftBadge: "就几包...", leftPriceLabel: "同样花 ¥29.9",
-    leftPriceValue: "零售价刚好抓饱一小袋 🛍️",
-    rightImage: "", rightTitle: "鑫安好物优选 · 仓库直发",
-    rightDesc: "一手源头批发价，各种辣条、果冻、火鸡面塞满大纸箱",
-    rightBadge: "一整箱！", rightPriceLabel: "同样花 ¥29.9",
-    rightPriceValue: "拿走约 3.5 斤重货 📦",
-    ctaText: "🚀 拒绝刺客！直接加客服微信拿批发价",
-    ctaSub: "一件也是批发价 · 五千平大仓库无需担心缺货",
+    leftImage: "",
+    leftTitle: "普通零售 / 门店拿货",
+    leftDesc: "层层中间商加价，陈列成本高，补一箱货都觉得贵。",
+    leftBadge: "零售价格",
+    leftPriceLabel: "同样花 29.9",
+    leftPriceValue: "结算后拿到的是单件高价",
+    rightImage: "",
+    rightTitle: "鑫安零食博物馆 · 仓库直发",
+    rightDesc: "一手源头拿货，口味、包装和补货节奏都更适合长期卖。",
+    rightBadge: "批发价",
+    rightPriceLabel: "同样花 29.9",
+    rightPriceValue: "拿到的是整箱或更低单价",
+    ctaText: "联系客户拿批发价",
+    ctaSub: "适合想做零食摊、便利货架、团购补货的人。",
   };
 
   return (
-    <section className="w-full max-w-4xl mx-auto px-4 py-12">
-      {/* 区块头部文案 */}
-      <div className="text-center mb-8">
-        <span className="px-3 py-1 bg-amber-100 text-amber-800 text-xs font-bold rounded-full">
-          20年线下老批发店的底气
+    <section className="mx-auto w-full max-w-6xl px-4 py-12">
+      <div className="mb-8 text-center">
+        <span className="inline-flex rounded-full border border-primary/15 bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
+          价格对比
         </span>
-        <h2 className="text-2xl sm:text-3xl font-black text-dark mt-2">
-          别再给中间商送钱了！
-        </h2>
-        <p className="text-sm text-dark/50 mt-1">
-          左右拖动中间的滑块，看看同样的预算在我们这能拿多少 🤫
-        </p>
+        <h2 className="mt-3 text-2xl font-black text-dark sm:text-3xl">别把中间商的利润，误认成你的成本</h2>
+        <p className="mt-2 text-sm text-dark/50">左右拖动中间滑块，看同样预算在两种渠道里能拿到什么。</p>
       </div>
 
-      {/* 滑动对比核心容器 */}
       <div
         ref={containerRef}
         onMouseMove={(e) => e.buttons === 1 && handleMove(e.clientX)}
         onClick={(e) => handleMove(e.clientX)}
-        className="relative w-full h-[320px] sm:h-[400px] rounded-3xl overflow-hidden shadow-2xl border border-white/20 select-none cursor-ew-resize"
+        className="relative h-[320px] w-full select-none overflow-hidden rounded-[2rem] border border-white/60 shadow-2xl shadow-dark/10 sm:h-[400px] cursor-ew-resize"
       >
-
-        {/* ===== 右侧底图：鑫安批发 ===== */}
-        <div className="absolute inset-0 bg-gradient-to-br from-orange-500 to-amber-600 flex flex-col justify-between p-6 sm:p-10 text-white">
+        <div className="absolute inset-0 flex flex-col justify-between bg-gradient-to-br from-[#ca7f2b] to-[#efb25a] p-6 text-white sm:p-10">
           {d.rightImage && (
-            <Image src={d.rightImage} alt="鑫安批发" fill sizes="(min-width: 640px) 100vw, 100vw" className="object-cover opacity-50" unoptimized />
+            <Image
+              src={d.rightImage}
+              alt="鑫安批发"
+              fill
+              sizes="100vw"
+              className="object-cover opacity-45"
+              unoptimized
+            />
           )}
-          <div className="self-end text-right relative z-10">
-            <span className="bg-white/20 backdrop-blur-sm text-xs px-3 py-1 rounded-full font-bold">
+          <div className="relative z-10 self-end text-right">
+            <span className="rounded-full bg-white/20 px-3 py-1 text-xs font-semibold backdrop-blur-sm">
               {d.rightTitle}
             </span>
-            <h3 className="text-3xl sm:text-5xl font-black mt-2 flex items-center justify-end gap-2">
-              <Truck size={36} className="animate-bounce" /> {d.rightBadge}
+            <h3 className="mt-2 flex items-center justify-end gap-2 text-3xl font-black sm:text-5xl">
+              <Truck size={36} />
+              {d.rightBadge}
             </h3>
-            <p className="text-sm opacity-90 mt-1 max-w-[200px] ml-auto">{d.rightDesc}</p>
+            <p className="mt-1 max-w-[220px] text-sm opacity-90">{d.rightDesc}</p>
           </div>
-          <div className="self-end text-right relative z-10">
+          <div className="relative z-10 self-end text-right">
             <p className="text-xs opacity-70">{d.rightPriceLabel}</p>
-            <p className="text-2xl sm:text-3xl font-extrabold text-yellow-300">{d.rightPriceValue}</p>
+            <p className="text-2xl font-extrabold text-yellow-200 sm:text-3xl">{d.rightPriceValue}</p>
           </div>
         </div>
 
-        {/* ===== 左侧浮层：普通零售 ===== */}
         <div
-          className="absolute inset-y-0 left-0 bg-gradient-to-br from-zinc-700 to-zinc-900 flex flex-col justify-between p-6 sm:p-10 text-zinc-300 overflow-hidden"
+          className="absolute inset-y-0 left-0 flex flex-col justify-between overflow-hidden bg-gradient-to-br from-[#26303a] to-[#10161b] p-6 text-zinc-300 sm:p-10"
           style={{ width: `${sliderPos}%` }}
         >
           {d.leftImage && (
-            <Image src={d.leftImage} alt="普通零售" fill sizes="(min-width: 640px) 100vw, 100vw" className="object-cover opacity-40" unoptimized />
+            <Image
+              src={d.leftImage}
+              alt="普通零售"
+              fill
+              sizes="100vw"
+              className="object-cover opacity-35"
+              unoptimized
+            />
           )}
-          <div className="w-[320px] sm:w-[400px] relative z-10">
-            <span className="bg-black/20 text-xs px-3 py-1 rounded-full font-bold">
-              {d.leftTitle}
-            </span>
-            <h3 className="text-3xl sm:text-5xl font-black text-white mt-2 flex items-center gap-2">
-              <ShoppingBag size={36} /> {d.leftBadge}
+          <div className="relative z-10 w-[320px] sm:w-[400px]">
+            <span className="rounded-full bg-black/20 px-3 py-1 text-xs font-semibold">{d.leftTitle}</span>
+            <h3 className="mt-2 flex items-center gap-2 text-3xl font-black text-white sm:text-5xl">
+              <ShoppingBag size={36} />
+              {d.leftBadge}
             </h3>
-            <p className="text-sm opacity-70 mt-1 max-w-[200px]">{d.leftDesc}</p>
+            <p className="mt-1 max-w-[220px] text-sm opacity-75">{d.leftDesc}</p>
           </div>
-          <div className="w-[320px] sm:w-[400px] relative z-10">
+          <div className="relative z-10 w-[320px] sm:w-[400px]">
             <p className="text-xs opacity-60">{d.leftPriceLabel}</p>
-            <p className="text-xl sm:text-2xl font-extrabold text-zinc-400 line-through">{d.leftPriceValue}</p>
+            <p className="text-xl font-extrabold text-zinc-400 line-through sm:text-2xl">
+              {d.leftPriceValue}
+            </p>
           </div>
         </div>
 
-        {/* ===== 中间滑动隔离线 ===== */}
         <div
-          className="absolute inset-y-0 w-1 bg-white cursor-ew-resize z-20 shadow-xl"
+          className="absolute inset-y-0 z-20 w-1 bg-white shadow-xl"
           style={{ left: `${sliderPos}%` }}
         >
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 bg-white text-dark rounded-full shadow-2xl flex items-center justify-center border-4 border-amber-500 z-30 transition-transform active:scale-110">
+          <div className="absolute left-1/2 top-1/2 flex h-10 w-10 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-4 border-amber-500 bg-white text-dark shadow-2xl">
             <ArrowLeftRight size={16} className="text-amber-600" />
           </div>
         </div>
-
       </div>
 
-      {/* 底部 CTA */}
       <div className="mt-6 text-center">
         <motion.button
           onClick={() => window.dispatchEvent(new CustomEvent("open-customer-service"))}
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
-          className="px-8 py-4 bg-dark text-white rounded-2xl font-bold shadow-lg shadow-dark/10 hover:bg-dark/90 transition-all cursor-pointer text-sm sm:text-base"
+          className="cursor-pointer rounded-2xl bg-dark px-8 py-4 text-sm font-semibold text-white shadow-lg shadow-dark/10 transition hover:bg-dark/90 sm:text-base"
         >
           {d.ctaText}
         </motion.button>
-        <p className="text-xs text-dark/30 mt-2">{d.ctaSub}</p>
+        <p className="mt-2 text-xs text-dark/30">{d.ctaSub}</p>
       </div>
     </section>
   );

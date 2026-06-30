@@ -1,17 +1,10 @@
 export function Footer() {
   return (
-    <footer className="border-t border-primary/10 mt-auto">
-      <div className="max-w-6xl mx-auto px-4 py-8 text-center">
-        <p className="text-2xl mb-2">🛒</p>
-        <p className="text-sm text-dark/40 font-medium">
-          鑫安好物优选
-        </p>
-        <p className="text-xs text-dark/30 mt-1">
-          精选好物 · 品质生活
-        </p>
-        <p className="text-xs text-dark/25 mt-2">
-          © {new Date().getFullYear()} 鑫安好物优选
-        </p>
+    <footer className="mt-auto border-t border-white/70 bg-white/45">
+      <div className="mx-auto max-w-6xl px-4 py-8 text-center">
+        <p className="text-sm font-semibold text-dark/55">鑫安零食博物馆</p>
+        <p className="mt-1 text-xs text-dark/35">精选零食 · 品质生活</p>
+        <p className="mt-2 text-xs text-dark/25">© {new Date().getFullYear()} 鑫安零食博物馆</p>
       </div>
     </footer>
   );
