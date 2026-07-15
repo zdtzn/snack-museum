@@ -1,0 +1,211 @@
+.baseImage {
+  filter: saturate(0.28) brightness(0.36) contrast(1.08);
+  transform: scale(1.04);
+}
+
+.grid {
+  position: absolute;
+  inset: -3%;
+  z-index: 5;
+  width: 106%;
+  height: 106%;
+  color: rgba(255, 205, 135, 0.48);
+  opacity: 0.16;
+  mix-blend-mode: screen;
+  pointer-events: none;
+  transition: transform 80ms linear;
+  will-change: transform;
+}
+
+.revealLayer {
+  --spotlight-x: 68%;
+  --spotlight-y: 55%;
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+  -webkit-mask-image: radial-gradient(
+    circle 270px at var(--spotlight-x) var(--spotlight-y),
+    rgb(0 0 0 / 1) 0%,
+    rgb(0 0 0 / 1) 40%,
+    rgb(0 0 0 / 0.75) 60%,
+    rgb(0 0 0 / 0.4) 75%,
+    rgb(0 0 0 / 0.12) 88%,
+    transparent 100%
+  );
+  mask-image: radial-gradient(
+    circle 270px at var(--spotlight-x) var(--spotlight-y),
+    rgb(0 0 0 / 1) 0%,
+    rgb(0 0 0 / 1) 40%,
+    rgb(0 0 0 / 0.75) 60%,
+    rgb(0 0 0 / 0.4) 75%,
+    rgb(0 0 0 / 0.12) 88%,
+    transparent 100%
+  );
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  will-change: mask-image, -webkit-mask-image;
+}
+
+.revealImage {
+  filter: saturate(1.06) brightness(1.03) contrast(1.03);
+  transform: scale(1.04);
+  animation: reveal-breathe 13s ease-in-out infinite alternate;
+}
+
+.atmosphere {
+  position: absolute;
+  inset: 0;
+  z-index: 15;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(18, 9, 5, 0.2) 0%, transparent 35%, rgba(18, 9, 5, 0.2) 72%, rgba(18, 9, 5, 0.72) 100%),
+    radial-gradient(circle at 50% 42%, transparent 16%, rgba(20, 10, 6, 0.12) 56%, rgba(17, 8, 4, 0.6) 100%),
+    linear-gradient(90deg, rgba(16, 8, 4, 0.48), transparent 36%, transparent 72%, rgba(16, 8, 4, 0.2));
+}
+
+.heroTitle {
+  font-family: "Songti SC", "STSong", "SimSun", ui-serif, Georgia, serif;
+  font-weight: 700;
+  color: #fff8ed;
+  text-shadow: 0 8px 42px rgba(22, 10, 4, 0.42);
+}
+
+.liquidGlass {
+  position: relative;
+  overflow: hidden;
+  border: 0;
+  background: rgba(255, 255, 255, 0.06);
+  background-blend-mode: luminosity;
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, 0.16),
+    0 16px 40px rgba(13, 6, 3, 0.12);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.liquidGlass::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.48) 0%,
+    rgba(255, 255, 255, 0.16) 20%,
+    transparent 42%,
+    transparent 60%,
+    rgba(255, 255, 255, 0.12) 82%,
+    rgba(255, 255, 255, 0.34) 100%
+  );
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.contentCard {
+  background: rgba(27, 13, 7, 0.32);
+}
+
+.pointerHint {
+  background: rgba(24, 12, 7, 0.26);
+}
+
+.floatingTag {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 64px;
+  height: 38px;
+  padding: 0 16px;
+  border-radius: 999px;
+  color: rgba(255, 248, 237, 0.74);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  animation: tag-float 7s ease-in-out infinite;
+}
+
+.tagCrisp {
+  left: 7%;
+  top: 37%;
+  transform: rotate(-8deg);
+}
+
+.tagSweet {
+  right: 9%;
+  top: 31%;
+  transform: rotate(7deg);
+}
+
+.tagSpicy {
+  left: 17%;
+  top: 58%;
+  transform: rotate(5deg);
+}
+
+.tagNew {
+  right: 18%;
+  top: 61%;
+  transform: rotate(-6deg);
+}
+
+@keyframes reveal-breathe {
+  from {
+    transform: scale(1.04) translate3d(0, 0, 0);
+  }
+  to {
+    transform: scale(1.065) translate3d(-0.35%, -0.25%, 0);
+  }
+}
+
+@keyframes tag-float {
+  0%,
+  100% {
+    margin-top: 0;
+  }
+  50% {
+    margin-top: -12px;
+  }
+}
+
+@media (max-width: 639px) {
+  .revealLayer {
+    -webkit-mask-image: radial-gradient(
+      circle 180px at 58% 49%,
+      rgb(0 0 0 / 1) 0%,
+      rgb(0 0 0 / 0.9) 45%,
+      rgb(0 0 0 / 0.28) 78%,
+      transparent 100%
+    );
+    mask-image: radial-gradient(
+      circle 180px at 58% 49%,
+      rgb(0 0 0 / 1) 0%,
+      rgb(0 0 0 / 0.9) 45%,
+      rgb(0 0 0 / 0.28) 78%,
+      transparent 100%
+    );
+  }
+
+  .atmosphere {
+    background:
+      linear-gradient(180deg, rgba(18, 9, 5, 0.28) 0%, transparent 30%, rgba(18, 9, 5, 0.18) 58%, rgba(18, 9, 5, 0.84) 100%),
+      radial-gradient(circle at 50% 42%, transparent 8%, rgba(17, 8, 4, 0.48) 100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .grid {
+    transition: none;
+  }
+
+  .revealImage,
+  .floatingTag {
+    animation: none;
+  }
+}
