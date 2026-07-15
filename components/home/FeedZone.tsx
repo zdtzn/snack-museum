@@ -73,7 +73,7 @@ export function FeedZone({ onFeedComplete, snackNames = [] }: FeedZoneProps) {
   );
 
   return (
-    <div className="fixed bottom-4 right-4 z-50 sm:bottom-6 sm:right-6">
+    <div className="fixed bottom-2 right-2 z-50 sm:bottom-6 sm:right-6">
       <div
         className={`relative rounded-[1.75rem] border border-white/80 bg-white/78 p-2 shadow-2xl shadow-dark/10 backdrop-blur transition-all duration-300 ${
           draggingOver ? "scale-105 ring-4 ring-primary/20" : ""

@@ -46,7 +46,7 @@ export function Mascot({ mood = "idle" }: { mood?: MascotMood }) {
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0 }}
-            className="mb-2 whitespace-nowrap rounded-2xl bg-white px-3 py-2 text-xs font-bold text-dark shadow-lg shadow-dark/8"
+            className="mb-2 hidden whitespace-nowrap rounded-2xl bg-white px-3 py-2 text-xs font-bold text-dark shadow-lg shadow-dark/8 sm:block"
           >
             {bubbles[bubbleIdx]}
             <div className="absolute left-1/2 top-full -mt-1.5 h-3 w-3 -translate-x-1/2 rotate-45 bg-white" />
@@ -65,7 +65,7 @@ export function Mascot({ mood = "idle" }: { mood?: MascotMood }) {
       )}
 
       <motion.div
-        className="select-none text-6xl sm:text-7xl"
+        className="select-none text-5xl sm:text-7xl"
         animate={
           mood === "spicy"
             ? { x: [0, -3, 3, -3, 3, 0], transition: { duration: 0.4 } }
