@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { readSnacks, writeSnacks } from "@/lib/db";
 import { Snack } from "@/lib/snacks";
 import { validateSnackInput, sanitizeSnack } from "@/lib/validate";
@@ -37,7 +38,12 @@ export async function POST(request: NextRequest) {
 
   const newSnack: Snack = { ...safeInput, id };
   snacks.push(newSnack);
-  writeSnacks(snacks);
+  const { warning } = await writeSnacks(snacks);
 
-  return NextResponse.json({ snack: newSnack }, { status: 201 });
+  // 让首页、热榜、详情页立即反映改动，而非等 ISR 过期
+  revalidatePath("/");
+  revalidatePath("/leaderboard");
+  revalidatePath(`/snack/${id}`);
+
+  return NextResponse.json({ snack: newSnack, warning }, { status: 201 });
 }

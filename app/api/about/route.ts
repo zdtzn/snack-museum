@@ -1,7 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
+import { revalidatePath } from "next/cache";
 import { validateObject } from "@/lib/validate";
+import { persistDataFile } from "@/lib/persist";
 
 const DATA_PATH = path.join(process.cwd(), "data", "about-data.json");
 
@@ -29,8 +31,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "数据过大（超过 200KB）" }, { status: 413 });
   }
 
-  const tmpPath = DATA_PATH + ".tmp";
-  fs.writeFileSync(tmpPath, serialized, "utf-8");
-  fs.renameSync(tmpPath, DATA_PATH);
-  return NextResponse.json({ success: true });
+  const { warning } = await persistDataFile("about-data.json", serialized);
+  revalidatePath("/about");
+  return NextResponse.json({ success: true, warning });
 }

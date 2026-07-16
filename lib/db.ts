@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import { Snack } from "./snacks";
+import { persistDataFile } from "./persist";
 
 const DATA_PATH = path.join(process.cwd(), "data", "snacks.json");
 
@@ -23,11 +24,10 @@ export function readSnacks(): Snack[] {
   }
 }
 
-/** 写入所有零食 */
-export function writeSnacks(snacks: Snack[]): void {
+/** 写入所有零食：原子写本地 + 回写 GitHub（若已配置） */
+export async function writeSnacks(
+  snacks: Snack[]
+): Promise<{ committed: boolean; warning?: string }> {
   const store: SnackStore = { snacks };
-  const tmpPath = DATA_PATH + ".tmp";
-  // 先写临时文件再原子重命名，防止写一半进程崩溃导致数据损坏
-  fs.writeFileSync(tmpPath, JSON.stringify(store, null, 2), "utf-8");
-  fs.renameSync(tmpPath, DATA_PATH);
+  return persistDataFile("snacks.json", JSON.stringify(store, null, 2));
 }

@@ -73,7 +73,7 @@ export function ResultCard({ result, onRetry }: ResultCardProps) {
         await navigator.share({
           files: [new File([blob], `零食人格-${result.brand}.png`, { type: "image/png" })],
           title: "我的零食人格",
-          text: `我在鑫安好物优选测出了【${result.title}】！快来测测你是什么零食人格~`,
+          text: `我在鑫安零食博物馆测出了【${result.title}】！快来测测你是什么零食人格~`,
         });
       } else {
         const link = document.createElement("a");
@@ -86,7 +86,7 @@ export function ResultCard({ result, onRetry }: ResultCardProps) {
   };
 
   const handleCopy = async () => {
-    const text = `我在鑫安好物优选测出了【${result.title}】！\n✨ 特质：${result.tags.join(" · ")}\n快来测测你是什么零食人格~`;
+    const text = `我在鑫安零食博物馆测出了【${result.title}】！\n✨ 特质：${result.tags.join(" · ")}\n快来测测你是什么零食人格~`;
     try { await navigator.clipboard.writeText(text); } catch {}
     setCopied(true); setTimeout(() => setCopied(false), 2000);
   };

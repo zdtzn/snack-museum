@@ -42,6 +42,19 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "图片不能超过 10MB" }, { status: 400 });
   }
 
+  // 校验文件头（magic bytes），防止伪造 Content-Type 上传非图片
+  const head = new Uint8Array(await file.slice(0, 12).arrayBuffer());
+  const isJpeg = head[0] === 0xff && head[1] === 0xd8 && head[2] === 0xff;
+  const isPng =
+    head[0] === 0x89 && head[1] === 0x50 && head[2] === 0x4e && head[3] === 0x47;
+  const isGif = head[0] === 0x47 && head[1] === 0x49 && head[2] === 0x46; // GIF
+  const isWebp =
+    head[0] === 0x52 && head[1] === 0x49 && head[2] === 0x46 && head[3] === 0x46 && // RIFF
+    head[8] === 0x57 && head[9] === 0x45 && head[10] === 0x42 && head[11] === 0x50; // WEBP
+  if (!isJpeg && !isPng && !isGif && !isWebp) {
+    return NextResponse.json({ error: "文件内容不是有效图片" }, { status: 400 });
+  }
+
   // 使用签名上传（signed upload）：timestamp + signature + api_key
   // 不再使用 upload_preset，避免与签名上传冲突
   const timestamp = Math.floor(Date.now() / 1000).toString();
