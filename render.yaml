@@ -17,3 +17,11 @@ services:
         value: admin
       - key: ADMIN_PASSWORD
         sync: false
+      # 数据持久化：后台改动通过 GitHub API 提交回仓库，
+      # 免费套餐无持久磁盘时也不会在重启/部署后丢数据。
+      - key: GITHUB_TOKEN
+        sync: false
+      - key: GITHUB_REPO
+        value: zdtzn/snack-museum
+      - key: GITHUB_BRANCH
+        value: main

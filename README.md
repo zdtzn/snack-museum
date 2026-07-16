@@ -1,4 +1,4 @@
-# 鑫安好物优选 (Snack Museum)
+# 鑫安零食博物馆 (Snack Museum)
 
 精选好物，品质生活。基于 Next.js 16 + React 19 + TypeScript + Tailwind CSS v4 的零食批发展示网站。
 
@@ -39,9 +39,22 @@ ADMIN_PASSWORD=<your-password>
 CLOUDINARY_CLOUD_NAME=<your-cloud-name>
 CLOUDINARY_API_KEY=<your-api-key>
 CLOUDINARY_API_SECRET=<your-api-secret>
+
+# 数据持久化（可选，用于免费 Render 部署）
+GITHUB_TOKEN=<fine-grained PAT，需对本仓库有 Contents 读写权限>
+GITHUB_REPO=zdtzn/snack-museum
+GITHUB_BRANCH=main
 ```
 
 管理后台：`/admin`，使用 Basic Auth 鉴权。
+
+### 数据持久化说明
+
+后台编辑的数据存放在 `data/*.json`。Render 免费套餐没有持久磁盘，实例重启/重新部署会重置文件系统。为避免丢数据，配置 `GITHUB_TOKEN` 后，后台每次保存会把改动 commit 回本仓库；下次部署时数据就带上了。
+
+- 未配置 `GITHUB_TOKEN` 时（如本地开发），只写本地文件，不回写仓库。
+- 回写会触发 Render 自动重新部署（免费套餐构建较慢，属正常现象）。
+- 若某次回写失败，接口会在响应里带 `warning` 字段，本地仍写入成功。
 
 ## 部署
 

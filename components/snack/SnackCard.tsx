@@ -78,7 +78,8 @@ export function SnackCard({ snack }: SnackCardProps) {
             {snack.review}
           </p>
           <div className="mt-5 flex items-center justify-between border-t border-dark/8 pt-4">
-            <span className="text-xs font-medium text-dark/40">拖动卡片可试喂右下角吉祥物</span>
+            <span className="hidden text-xs font-medium text-dark/40 sm:inline">拖动卡片可试喂右下角吉祥物</span>
+            <span className="text-xs font-medium text-dark/40 sm:hidden">点右下角吉祥物试喂</span>
             <span className="text-sm font-semibold text-dark transition group-hover:text-primary">查看详情</span>
           </div>
         </div>

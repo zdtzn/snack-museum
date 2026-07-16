@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { readSnacks, writeSnacks } from "@/lib/db";
 import { validateSnackInput, sanitizeSnack } from "@/lib/validate";
 
@@ -30,9 +31,13 @@ export async function PUT(
   }
 
   snacks[index] = { ...snacks[index], ...safeInput, id }; // 保持 id 不变
-  writeSnacks(snacks);
+  const { warning } = await writeSnacks(snacks);
 
-  return NextResponse.json({ snack: snacks[index] });
+  revalidatePath("/");
+  revalidatePath("/leaderboard");
+  revalidatePath(`/snack/${id}`);
+
+  return NextResponse.json({ snack: snacks[index], warning });
 }
 
 // DELETE /api/snacks/[id] — 删除零食
@@ -48,6 +53,11 @@ export async function DELETE(
     return NextResponse.json({ error: "Not found" }, { status: 404 });
   }
 
-  writeSnacks(filtered);
-  return NextResponse.json({ success: true });
+  const { warning } = await writeSnacks(filtered);
+
+  revalidatePath("/");
+  revalidatePath("/leaderboard");
+  revalidatePath(`/snack/${id}`);
+
+  return NextResponse.json({ success: true, warning });
 }

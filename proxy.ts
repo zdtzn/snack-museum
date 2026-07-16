@@ -30,6 +30,20 @@ function unauthorized() {
   });
 }
 
+/** 常量时间字符串比较，避免登录密码被计时攻击探测 */
+function safeEqual(a: string, b: string) {
+  const enc = new TextEncoder();
+  const aBytes = enc.encode(a);
+  const bBytes = enc.encode(b);
+  // 长度不同直接判否，但仍走完循环以尽量恒定耗时
+  const len = Math.max(aBytes.length, bBytes.length);
+  let diff = aBytes.length ^ bBytes.length;
+  for (let i = 0; i < len; i++) {
+    diff |= (aBytes[i] ?? 0) ^ (bBytes[i] ?? 0);
+  }
+  return diff === 0;
+}
+
 function parseBasicAuth(header: string | null) {
   if (!header?.startsWith("Basic ")) {
     return null;
@@ -65,8 +79,9 @@ export function proxy(request: NextRequest) {
   const credentials = parseBasicAuth(request.headers.get("authorization"));
 
   if (
-    credentials?.username === adminUsername &&
-    credentials.password === adminPassword
+    credentials &&
+    safeEqual(credentials.username, adminUsername) &&
+    safeEqual(credentials.password, adminPassword)
   ) {
     return NextResponse.next();
   }

@@ -37,10 +37,8 @@ yarn-error.log*
 .vercel
 .git.broken-*/
 
-# admin-editable data (don't overwrite on deploy)
-data/about-data.json
-data/customer-service.json
-data/snacks.json
+# dev logs
+dev-server.log
 
 # typescript
 *.tsbuildinfo

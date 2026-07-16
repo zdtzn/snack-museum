@@ -27,7 +27,7 @@ export async function generateMetadata({
     return { title: "零食未找到" };
   }
   return {
-    title: `${snack.name} - ${snack.brand} | 鑫安好物优选`,
+    title: `${snack.name} - ${snack.brand} | 鑫安零食博物馆`,
     description: snack.subtitle
       ? `${snack.subtitle}。${snack.review.slice(0, 80)}`
       : snack.review.slice(0, 120),

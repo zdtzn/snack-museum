@@ -1,6 +1,8 @@
 import fs from "fs";
 import path from "path";
+import { revalidatePath } from "next/cache";
 import { validateObject } from "@/lib/validate";
+import { persistDataFile } from "@/lib/persist";
 
 const dataPath = path.join(process.cwd(), "data", "price-comparison.json");
 
@@ -27,8 +29,7 @@ export async function POST(req: Request) {
     return Response.json({ error: "数据过大（超过 100KB）" }, { status: 413 });
   }
 
-  const tmpPath = dataPath + ".tmp";
-  fs.writeFileSync(tmpPath, serialized, "utf-8");
-  fs.renameSync(tmpPath, dataPath);
-  return Response.json({ ok: true });
+  const { warning } = await persistDataFile("price-comparison.json", serialized);
+  revalidatePath("/");
+  return Response.json({ ok: true, warning });
 }

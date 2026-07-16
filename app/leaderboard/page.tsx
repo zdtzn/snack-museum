@@ -4,7 +4,7 @@ import { getSnacks } from "@/lib/data";
 import { LeaderboardClient } from "./LeaderboardClient";
 
 export const metadata = {
-  title: "好物精选 | 鑫安好物优选",
+  title: "好物精选 | 鑫安零食博物馆",
   description: "按口感评分排序的精选零食榜单，每一款都经过严格筛选。",
 };
 
